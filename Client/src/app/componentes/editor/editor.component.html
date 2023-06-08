@@ -1,0 +1,12 @@
+<!---- Editor-->
+<label for="exampleTextarea" class="form-label mt-4">Editor</label>
+<div class="codemirror">
+  <ngx-codemirror
+    [(ngModel)]="contenidoEditor"
+    [options]="{
+      lineNumbers: true,
+      theme: 'material',
+      mode: 'javascript'
+    }"
+  ></ngx-codemirror>
+</div>
