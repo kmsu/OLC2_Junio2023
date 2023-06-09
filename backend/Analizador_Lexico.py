@@ -4,50 +4,101 @@ import ply.lex as lex
 errores = []
 
 reserved = {
-    'console'     :   'RCONSOLE',
-    'log'         :   'RLOG',
-    'let'         :   'RLET',
-    'string'      :   'RSTRING',
-    'number'      :   'RNUMBER',
-    'boolean'     :   'RBOOLEAN',
-    'true'        :   'RTRUE',
-    'false'       :   'RFALSE',
-    'if'          :   'RIF',
-    'else'        :   'RELSE',
+    'console'       :   'RCONSOLE',
+    'log'           :   'RLOG',
+    'null'          :   'RNULL',
+    'any'           :   'RANY',
+    'interface'     :   'RINTERFACE',
+    'toUpperCase'   :   'RTOUPPERCASE',
+    'toLowerCase'   :   'RTOLOWERCASE',
+    'toFixed'       :   'RTOFIXED',
+    'toExponential' :   'RTOEXPONENTIAL',
+    'toString'      :   'RTOSTRING',
+    'split'         :   'RSPLIT',
+    'concat'        :   'RCONCAT',
+    'function'      :   'RFUNCTION',
+    'log'           :   'RLOG',
+    'let'           :   'RLET',
+    'string'        :   'RSTRING',
+    'number'        :   'RNUMBER',
+    'boolean'       :   'RBOOLEAN',
+    'true'          :   'RTRUE',
+    'false'         :   'RFALSE',
+    'break'         :   'RBREAK',
+    'continue'      :   'RCONTINUE',
+    'return'        :   'RRETURN',
+    'if'            :   'RIF',
+    'else'          :   'RELSE',
+    'for'           :   'RFOR',
+    'while'         :   'RWHILE'
 
 }
 
 tokens  = [
     'PUNTO',
-    'DPUNTOS',
+    'DOSPUNTOS',
     'PTCOMA',
     'PARI',
     'PARD',
     'LLAVEIZQ',
     'LLAVEDER',
+    'CORIZQ',
+    'CORDER',
     'MAS',
     'MENOS',
     'POR',
     'DIV',
+    'POTENCIA',
+    'MODULO',
     'IGUAL',
+    'MAYORQUE',
+    'MENORQUE',
+    'MAYORIGUAL',
+    'MENORIGUAL',
+    'IGUALDAD',
+    'DISTINTO',
+    'OR',
+    'AND',
+    'NOT',
+    'INCREMENTO',
+    'DECREMENTO',
     'ENTERO',
     'DECIMAL',
     'CADENA',
     'ID',
+    'COMILLASIMPLE',
+    'COMILLADOBLE'
 ]+ list(reserved.values())
 # Tokens
 t_PUNTO         = r'\.'
-t_DPUNTOS       = r'\:'
+t_DOSPUNTOS     = r'\:'
 t_PTCOMA        = r'\;'
 t_PARI          = r'\('
 t_PARD          = r'\)'
 t_LLAVEIZQ      = r'\{'
 t_LLAVEDER      = r'\}'
+t_CORIZQ        = r'\['
+t_CORDER        = r'\]'
 t_MAS           = r'\+'
 t_MENOS         = r'\-'
 t_POR           = r'\*'
 t_DIV           = r'\/'
+t_POTENCIA      = r'\^'
+t_MODULO        = r'\%'
 t_IGUAL         = r'\='
+t_MAYORQUE      = r'\>'
+t_MENORQUE      = r'\<'
+t_MAYORIGUAL    = r'\>\='
+t_MENORIGUAL    = r'\>\='
+t_IGUALDAD      = r'\=\=\='
+t_DISTINTO      = r'\!\=\='
+t_OR            = r'\|\|'
+t_AND           = r'\&\&'
+t_NOT           = r'\!'
+t_INCREMENTO    = r'++'
+t_DECREMENTO    = r'\-\-'
+t_COMILLASIMPLE = r'\'' 
+t_COMILLADOBLE  = r'\"'
 
 #Decimal
 def t_DECIMAL(t):

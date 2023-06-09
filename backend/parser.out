@@ -24,20 +24,21 @@ Rule 14    expresion -> expresion MENOS expresion
 Rule 15    expresion -> expresion POR expresion
 Rule 16    expresion -> expresion DIV expresion
 Rule 17    expresion -> MENOS expresion
-Rule 18    expresion -> ENTERO
-Rule 19    expresion -> DECIMAL
-Rule 20    expresion -> CADENA
-Rule 21    expresion -> RTRUE
-Rule 22    expresion -> RFALSE
+Rule 18    expresion -> ID
+Rule 19    expresion -> ENTERO
+Rule 20    expresion -> DECIMAL
+Rule 21    expresion -> CADENA
+Rule 22    expresion -> RTRUE
+Rule 23    expresion -> RFALSE
 
 Terminals, with rules where they appear
 
-CADENA               : 20
-DECIMAL              : 19
+CADENA               : 21
+DECIMAL              : 20
 DIV                  : 16
 DPUNTOS              : 8
-ENTERO               : 18
-ID                   : 8
+ENTERO               : 19
+ID                   : 8 18
 IGUAL                : 8
 LLAVEDER             : 9
 LLAVEIZQ             : 9
@@ -51,13 +52,13 @@ PUNTO                : 7
 RBOOLEAN             : 12
 RCONSOLE             : 7
 RELSE                : 
-RFALSE               : 22
+RFALSE               : 23
 RIF                  : 9
 RLET                 : 8
 RLOG                 : 7
 RNUMBER              : 11
 RSTRING              : 10
-RTRUE                : 21
+RTRUE                : 22
 error                : 
 
 Nonterminals, with rules where they appear
@@ -238,18 +239,20 @@ state 16
     (15) expresion -> . expresion POR expresion
     (16) expresion -> . expresion DIV expresion
     (17) expresion -> . MENOS expresion
-    (18) expresion -> . ENTERO
-    (19) expresion -> . DECIMAL
-    (20) expresion -> . CADENA
-    (21) expresion -> . RTRUE
-    (22) expresion -> . RFALSE
+    (18) expresion -> . ID
+    (19) expresion -> . ENTERO
+    (20) expresion -> . DECIMAL
+    (21) expresion -> . CADENA
+    (22) expresion -> . RTRUE
+    (23) expresion -> . RFALSE
 
     MENOS           shift and go to state 20
-    ENTERO          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    CADENA          shift and go to state 23
-    RTRUE           shift and go to state 24
-    RFALSE          shift and go to state 25
+    ID              shift and go to state 21
+    ENTERO          shift and go to state 22
+    DECIMAL         shift and go to state 23
+    CADENA          shift and go to state 24
+    RTRUE           shift and go to state 25
+    RFALSE          shift and go to state 26
 
     expresion                      shift and go to state 19
 
@@ -257,7 +260,7 @@ state 17
 
     (7) imprimir -> RCONSOLE PUNTO RLOG . PARI expresion PARD
 
-    PARI            shift and go to state 26
+    PARI            shift and go to state 27
 
 
 state 18
@@ -267,11 +270,11 @@ state 18
     (11) tipo -> . RNUMBER
     (12) tipo -> . RBOOLEAN
 
-    RSTRING         shift and go to state 28
-    RNUMBER         shift and go to state 29
-    RBOOLEAN        shift and go to state 30
+    RSTRING         shift and go to state 29
+    RNUMBER         shift and go to state 30
+    RBOOLEAN        shift and go to state 31
 
-    tipo                           shift and go to state 27
+    tipo                           shift and go to state 28
 
 state 19
 
@@ -281,11 +284,11 @@ state 19
     (15) expresion -> expresion . POR expresion
     (16) expresion -> expresion . DIV expresion
 
-    PARD            shift and go to state 31
-    MAS             shift and go to state 32
-    MENOS           shift and go to state 33
-    POR             shift and go to state 34
-    DIV             shift and go to state 35
+    PARD            shift and go to state 32
+    MAS             shift and go to state 33
+    MENOS           shift and go to state 34
+    POR             shift and go to state 35
+    DIV             shift and go to state 36
 
 
 state 20
@@ -296,82 +299,96 @@ state 20
     (15) expresion -> . expresion POR expresion
     (16) expresion -> . expresion DIV expresion
     (17) expresion -> . MENOS expresion
-    (18) expresion -> . ENTERO
-    (19) expresion -> . DECIMAL
-    (20) expresion -> . CADENA
-    (21) expresion -> . RTRUE
-    (22) expresion -> . RFALSE
+    (18) expresion -> . ID
+    (19) expresion -> . ENTERO
+    (20) expresion -> . DECIMAL
+    (21) expresion -> . CADENA
+    (22) expresion -> . RTRUE
+    (23) expresion -> . RFALSE
 
     MENOS           shift and go to state 20
-    ENTERO          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    CADENA          shift and go to state 23
-    RTRUE           shift and go to state 24
-    RFALSE          shift and go to state 25
+    ID              shift and go to state 21
+    ENTERO          shift and go to state 22
+    DECIMAL         shift and go to state 23
+    CADENA          shift and go to state 24
+    RTRUE           shift and go to state 25
+    RFALSE          shift and go to state 26
 
-    expresion                      shift and go to state 36
+    expresion                      shift and go to state 37
 
 state 21
 
-    (18) expresion -> ENTERO .
+    (18) expresion -> ID .
 
-    PARD            reduce using rule 18 (expresion -> ENTERO .)
-    MAS             reduce using rule 18 (expresion -> ENTERO .)
-    MENOS           reduce using rule 18 (expresion -> ENTERO .)
-    POR             reduce using rule 18 (expresion -> ENTERO .)
-    DIV             reduce using rule 18 (expresion -> ENTERO .)
-    PTCOMA          reduce using rule 18 (expresion -> ENTERO .)
+    PARD            reduce using rule 18 (expresion -> ID .)
+    MAS             reduce using rule 18 (expresion -> ID .)
+    MENOS           reduce using rule 18 (expresion -> ID .)
+    POR             reduce using rule 18 (expresion -> ID .)
+    DIV             reduce using rule 18 (expresion -> ID .)
+    PTCOMA          reduce using rule 18 (expresion -> ID .)
 
 
 state 22
 
-    (19) expresion -> DECIMAL .
+    (19) expresion -> ENTERO .
 
-    PARD            reduce using rule 19 (expresion -> DECIMAL .)
-    MAS             reduce using rule 19 (expresion -> DECIMAL .)
-    MENOS           reduce using rule 19 (expresion -> DECIMAL .)
-    POR             reduce using rule 19 (expresion -> DECIMAL .)
-    DIV             reduce using rule 19 (expresion -> DECIMAL .)
-    PTCOMA          reduce using rule 19 (expresion -> DECIMAL .)
+    PARD            reduce using rule 19 (expresion -> ENTERO .)
+    MAS             reduce using rule 19 (expresion -> ENTERO .)
+    MENOS           reduce using rule 19 (expresion -> ENTERO .)
+    POR             reduce using rule 19 (expresion -> ENTERO .)
+    DIV             reduce using rule 19 (expresion -> ENTERO .)
+    PTCOMA          reduce using rule 19 (expresion -> ENTERO .)
 
 
 state 23
 
-    (20) expresion -> CADENA .
+    (20) expresion -> DECIMAL .
 
-    PARD            reduce using rule 20 (expresion -> CADENA .)
-    MAS             reduce using rule 20 (expresion -> CADENA .)
-    MENOS           reduce using rule 20 (expresion -> CADENA .)
-    POR             reduce using rule 20 (expresion -> CADENA .)
-    DIV             reduce using rule 20 (expresion -> CADENA .)
-    PTCOMA          reduce using rule 20 (expresion -> CADENA .)
+    PARD            reduce using rule 20 (expresion -> DECIMAL .)
+    MAS             reduce using rule 20 (expresion -> DECIMAL .)
+    MENOS           reduce using rule 20 (expresion -> DECIMAL .)
+    POR             reduce using rule 20 (expresion -> DECIMAL .)
+    DIV             reduce using rule 20 (expresion -> DECIMAL .)
+    PTCOMA          reduce using rule 20 (expresion -> DECIMAL .)
 
 
 state 24
 
-    (21) expresion -> RTRUE .
+    (21) expresion -> CADENA .
 
-    PARD            reduce using rule 21 (expresion -> RTRUE .)
-    MAS             reduce using rule 21 (expresion -> RTRUE .)
-    MENOS           reduce using rule 21 (expresion -> RTRUE .)
-    POR             reduce using rule 21 (expresion -> RTRUE .)
-    DIV             reduce using rule 21 (expresion -> RTRUE .)
-    PTCOMA          reduce using rule 21 (expresion -> RTRUE .)
+    PARD            reduce using rule 21 (expresion -> CADENA .)
+    MAS             reduce using rule 21 (expresion -> CADENA .)
+    MENOS           reduce using rule 21 (expresion -> CADENA .)
+    POR             reduce using rule 21 (expresion -> CADENA .)
+    DIV             reduce using rule 21 (expresion -> CADENA .)
+    PTCOMA          reduce using rule 21 (expresion -> CADENA .)
 
 
 state 25
 
-    (22) expresion -> RFALSE .
+    (22) expresion -> RTRUE .
 
-    PARD            reduce using rule 22 (expresion -> RFALSE .)
-    MAS             reduce using rule 22 (expresion -> RFALSE .)
-    MENOS           reduce using rule 22 (expresion -> RFALSE .)
-    POR             reduce using rule 22 (expresion -> RFALSE .)
-    DIV             reduce using rule 22 (expresion -> RFALSE .)
-    PTCOMA          reduce using rule 22 (expresion -> RFALSE .)
+    PARD            reduce using rule 22 (expresion -> RTRUE .)
+    MAS             reduce using rule 22 (expresion -> RTRUE .)
+    MENOS           reduce using rule 22 (expresion -> RTRUE .)
+    POR             reduce using rule 22 (expresion -> RTRUE .)
+    DIV             reduce using rule 22 (expresion -> RTRUE .)
+    PTCOMA          reduce using rule 22 (expresion -> RTRUE .)
 
 
 state 26
+
+    (23) expresion -> RFALSE .
+
+    PARD            reduce using rule 23 (expresion -> RFALSE .)
+    MAS             reduce using rule 23 (expresion -> RFALSE .)
+    MENOS           reduce using rule 23 (expresion -> RFALSE .)
+    POR             reduce using rule 23 (expresion -> RFALSE .)
+    DIV             reduce using rule 23 (expresion -> RFALSE .)
+    PTCOMA          reduce using rule 23 (expresion -> RFALSE .)
+
+
+state 27
 
     (7) imprimir -> RCONSOLE PUNTO RLOG PARI . expresion PARD
     (13) expresion -> . expresion MAS expresion
@@ -379,57 +396,59 @@ state 26
     (15) expresion -> . expresion POR expresion
     (16) expresion -> . expresion DIV expresion
     (17) expresion -> . MENOS expresion
-    (18) expresion -> . ENTERO
-    (19) expresion -> . DECIMAL
-    (20) expresion -> . CADENA
-    (21) expresion -> . RTRUE
-    (22) expresion -> . RFALSE
+    (18) expresion -> . ID
+    (19) expresion -> . ENTERO
+    (20) expresion -> . DECIMAL
+    (21) expresion -> . CADENA
+    (22) expresion -> . RTRUE
+    (23) expresion -> . RFALSE
 
     MENOS           shift and go to state 20
-    ENTERO          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    CADENA          shift and go to state 23
-    RTRUE           shift and go to state 24
-    RFALSE          shift and go to state 25
+    ID              shift and go to state 21
+    ENTERO          shift and go to state 22
+    DECIMAL         shift and go to state 23
+    CADENA          shift and go to state 24
+    RTRUE           shift and go to state 25
+    RFALSE          shift and go to state 26
 
-    expresion                      shift and go to state 37
+    expresion                      shift and go to state 38
 
-state 27
+state 28
 
     (8) declaracion_normal -> RLET ID DPUNTOS tipo . IGUAL expresion
 
-    IGUAL           shift and go to state 38
+    IGUAL           shift and go to state 39
 
 
-state 28
+state 29
 
     (10) tipo -> RSTRING .
 
     IGUAL           reduce using rule 10 (tipo -> RSTRING .)
 
 
-state 29
+state 30
 
     (11) tipo -> RNUMBER .
 
     IGUAL           reduce using rule 11 (tipo -> RNUMBER .)
 
 
-state 30
+state 31
 
     (12) tipo -> RBOOLEAN .
 
     IGUAL           reduce using rule 12 (tipo -> RBOOLEAN .)
 
 
-state 31
+state 32
 
     (9) condicional_if -> RIF PARI expresion PARD . LLAVEIZQ LLAVEDER
 
-    LLAVEIZQ        shift and go to state 39
+    LLAVEIZQ        shift and go to state 40
 
 
-state 32
+state 33
 
     (13) expresion -> expresion MAS . expresion
     (13) expresion -> . expresion MAS expresion
@@ -437,22 +456,24 @@ state 32
     (15) expresion -> . expresion POR expresion
     (16) expresion -> . expresion DIV expresion
     (17) expresion -> . MENOS expresion
-    (18) expresion -> . ENTERO
-    (19) expresion -> . DECIMAL
-    (20) expresion -> . CADENA
-    (21) expresion -> . RTRUE
-    (22) expresion -> . RFALSE
+    (18) expresion -> . ID
+    (19) expresion -> . ENTERO
+    (20) expresion -> . DECIMAL
+    (21) expresion -> . CADENA
+    (22) expresion -> . RTRUE
+    (23) expresion -> . RFALSE
 
     MENOS           shift and go to state 20
-    ENTERO          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    CADENA          shift and go to state 23
-    RTRUE           shift and go to state 24
-    RFALSE          shift and go to state 25
+    ID              shift and go to state 21
+    ENTERO          shift and go to state 22
+    DECIMAL         shift and go to state 23
+    CADENA          shift and go to state 24
+    RTRUE           shift and go to state 25
+    RFALSE          shift and go to state 26
 
-    expresion                      shift and go to state 40
+    expresion                      shift and go to state 41
 
-state 33
+state 34
 
     (14) expresion -> expresion MENOS . expresion
     (13) expresion -> . expresion MAS expresion
@@ -460,22 +481,24 @@ state 33
     (15) expresion -> . expresion POR expresion
     (16) expresion -> . expresion DIV expresion
     (17) expresion -> . MENOS expresion
-    (18) expresion -> . ENTERO
-    (19) expresion -> . DECIMAL
-    (20) expresion -> . CADENA
-    (21) expresion -> . RTRUE
-    (22) expresion -> . RFALSE
+    (18) expresion -> . ID
+    (19) expresion -> . ENTERO
+    (20) expresion -> . DECIMAL
+    (21) expresion -> . CADENA
+    (22) expresion -> . RTRUE
+    (23) expresion -> . RFALSE
 
     MENOS           shift and go to state 20
-    ENTERO          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    CADENA          shift and go to state 23
-    RTRUE           shift and go to state 24
-    RFALSE          shift and go to state 25
+    ID              shift and go to state 21
+    ENTERO          shift and go to state 22
+    DECIMAL         shift and go to state 23
+    CADENA          shift and go to state 24
+    RTRUE           shift and go to state 25
+    RFALSE          shift and go to state 26
 
-    expresion                      shift and go to state 41
+    expresion                      shift and go to state 42
 
-state 34
+state 35
 
     (15) expresion -> expresion POR . expresion
     (13) expresion -> . expresion MAS expresion
@@ -483,22 +506,24 @@ state 34
     (15) expresion -> . expresion POR expresion
     (16) expresion -> . expresion DIV expresion
     (17) expresion -> . MENOS expresion
-    (18) expresion -> . ENTERO
-    (19) expresion -> . DECIMAL
-    (20) expresion -> . CADENA
-    (21) expresion -> . RTRUE
-    (22) expresion -> . RFALSE
+    (18) expresion -> . ID
+    (19) expresion -> . ENTERO
+    (20) expresion -> . DECIMAL
+    (21) expresion -> . CADENA
+    (22) expresion -> . RTRUE
+    (23) expresion -> . RFALSE
 
     MENOS           shift and go to state 20
-    ENTERO          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    CADENA          shift and go to state 23
-    RTRUE           shift and go to state 24
-    RFALSE          shift and go to state 25
+    ID              shift and go to state 21
+    ENTERO          shift and go to state 22
+    DECIMAL         shift and go to state 23
+    CADENA          shift and go to state 24
+    RTRUE           shift and go to state 25
+    RFALSE          shift and go to state 26
 
-    expresion                      shift and go to state 42
+    expresion                      shift and go to state 43
 
-state 35
+state 36
 
     (16) expresion -> expresion DIV . expresion
     (13) expresion -> . expresion MAS expresion
@@ -506,22 +531,24 @@ state 35
     (15) expresion -> . expresion POR expresion
     (16) expresion -> . expresion DIV expresion
     (17) expresion -> . MENOS expresion
-    (18) expresion -> . ENTERO
-    (19) expresion -> . DECIMAL
-    (20) expresion -> . CADENA
-    (21) expresion -> . RTRUE
-    (22) expresion -> . RFALSE
+    (18) expresion -> . ID
+    (19) expresion -> . ENTERO
+    (20) expresion -> . DECIMAL
+    (21) expresion -> . CADENA
+    (22) expresion -> . RTRUE
+    (23) expresion -> . RFALSE
 
     MENOS           shift and go to state 20
-    ENTERO          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    CADENA          shift and go to state 23
-    RTRUE           shift and go to state 24
-    RFALSE          shift and go to state 25
+    ID              shift and go to state 21
+    ENTERO          shift and go to state 22
+    DECIMAL         shift and go to state 23
+    CADENA          shift and go to state 24
+    RTRUE           shift and go to state 25
+    RFALSE          shift and go to state 26
 
-    expresion                      shift and go to state 43
+    expresion                      shift and go to state 44
 
-state 36
+state 37
 
     (17) expresion -> MENOS expresion .
     (13) expresion -> expresion . MAS expresion
@@ -536,13 +563,13 @@ state 36
     DIV             reduce using rule 17 (expresion -> MENOS expresion .)
     PTCOMA          reduce using rule 17 (expresion -> MENOS expresion .)
 
-  ! MAS             [ shift and go to state 32 ]
-  ! MENOS           [ shift and go to state 33 ]
-  ! POR             [ shift and go to state 34 ]
-  ! DIV             [ shift and go to state 35 ]
+  ! MAS             [ shift and go to state 33 ]
+  ! MENOS           [ shift and go to state 34 ]
+  ! POR             [ shift and go to state 35 ]
+  ! DIV             [ shift and go to state 36 ]
 
 
-state 37
+state 38
 
     (7) imprimir -> RCONSOLE PUNTO RLOG PARI expresion . PARD
     (13) expresion -> expresion . MAS expresion
@@ -550,14 +577,14 @@ state 37
     (15) expresion -> expresion . POR expresion
     (16) expresion -> expresion . DIV expresion
 
-    PARD            shift and go to state 44
-    MAS             shift and go to state 32
-    MENOS           shift and go to state 33
-    POR             shift and go to state 34
-    DIV             shift and go to state 35
+    PARD            shift and go to state 45
+    MAS             shift and go to state 33
+    MENOS           shift and go to state 34
+    POR             shift and go to state 35
+    DIV             shift and go to state 36
 
 
-state 38
+state 39
 
     (8) declaracion_normal -> RLET ID DPUNTOS tipo IGUAL . expresion
     (13) expresion -> . expresion MAS expresion
@@ -565,29 +592,31 @@ state 38
     (15) expresion -> . expresion POR expresion
     (16) expresion -> . expresion DIV expresion
     (17) expresion -> . MENOS expresion
-    (18) expresion -> . ENTERO
-    (19) expresion -> . DECIMAL
-    (20) expresion -> . CADENA
-    (21) expresion -> . RTRUE
-    (22) expresion -> . RFALSE
+    (18) expresion -> . ID
+    (19) expresion -> . ENTERO
+    (20) expresion -> . DECIMAL
+    (21) expresion -> . CADENA
+    (22) expresion -> . RTRUE
+    (23) expresion -> . RFALSE
 
     MENOS           shift and go to state 20
-    ENTERO          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    CADENA          shift and go to state 23
-    RTRUE           shift and go to state 24
-    RFALSE          shift and go to state 25
+    ID              shift and go to state 21
+    ENTERO          shift and go to state 22
+    DECIMAL         shift and go to state 23
+    CADENA          shift and go to state 24
+    RTRUE           shift and go to state 25
+    RFALSE          shift and go to state 26
 
-    expresion                      shift and go to state 45
+    expresion                      shift and go to state 46
 
-state 39
+state 40
 
     (9) condicional_if -> RIF PARI expresion PARD LLAVEIZQ . LLAVEDER
 
-    LLAVEDER        shift and go to state 46
+    LLAVEDER        shift and go to state 47
 
 
-state 40
+state 41
 
     (13) expresion -> expresion MAS expresion .
     (13) expresion -> expresion . MAS expresion
@@ -599,16 +628,16 @@ state 40
     MAS             reduce using rule 13 (expresion -> expresion MAS expresion .)
     MENOS           reduce using rule 13 (expresion -> expresion MAS expresion .)
     PTCOMA          reduce using rule 13 (expresion -> expresion MAS expresion .)
-    POR             shift and go to state 34
-    DIV             shift and go to state 35
+    POR             shift and go to state 35
+    DIV             shift and go to state 36
 
   ! POR             [ reduce using rule 13 (expresion -> expresion MAS expresion .) ]
   ! DIV             [ reduce using rule 13 (expresion -> expresion MAS expresion .) ]
-  ! MAS             [ shift and go to state 32 ]
-  ! MENOS           [ shift and go to state 33 ]
+  ! MAS             [ shift and go to state 33 ]
+  ! MENOS           [ shift and go to state 34 ]
 
 
-state 41
+state 42
 
     (14) expresion -> expresion MENOS expresion .
     (13) expresion -> expresion . MAS expresion
@@ -620,16 +649,16 @@ state 41
     MAS             reduce using rule 14 (expresion -> expresion MENOS expresion .)
     MENOS           reduce using rule 14 (expresion -> expresion MENOS expresion .)
     PTCOMA          reduce using rule 14 (expresion -> expresion MENOS expresion .)
-    POR             shift and go to state 34
-    DIV             shift and go to state 35
+    POR             shift and go to state 35
+    DIV             shift and go to state 36
 
   ! POR             [ reduce using rule 14 (expresion -> expresion MENOS expresion .) ]
   ! DIV             [ reduce using rule 14 (expresion -> expresion MENOS expresion .) ]
-  ! MAS             [ shift and go to state 32 ]
-  ! MENOS           [ shift and go to state 33 ]
+  ! MAS             [ shift and go to state 33 ]
+  ! MENOS           [ shift and go to state 34 ]
 
 
-state 42
+state 43
 
     (15) expresion -> expresion POR expresion .
     (13) expresion -> expresion . MAS expresion
@@ -644,13 +673,13 @@ state 42
     DIV             reduce using rule 15 (expresion -> expresion POR expresion .)
     PTCOMA          reduce using rule 15 (expresion -> expresion POR expresion .)
 
-  ! MAS             [ shift and go to state 32 ]
-  ! MENOS           [ shift and go to state 33 ]
-  ! POR             [ shift and go to state 34 ]
-  ! DIV             [ shift and go to state 35 ]
+  ! MAS             [ shift and go to state 33 ]
+  ! MENOS           [ shift and go to state 34 ]
+  ! POR             [ shift and go to state 35 ]
+  ! DIV             [ shift and go to state 36 ]
 
 
-state 43
+state 44
 
     (16) expresion -> expresion DIV expresion .
     (13) expresion -> expresion . MAS expresion
@@ -665,20 +694,20 @@ state 43
     DIV             reduce using rule 16 (expresion -> expresion DIV expresion .)
     PTCOMA          reduce using rule 16 (expresion -> expresion DIV expresion .)
 
-  ! MAS             [ shift and go to state 32 ]
-  ! MENOS           [ shift and go to state 33 ]
-  ! POR             [ shift and go to state 34 ]
-  ! DIV             [ shift and go to state 35 ]
+  ! MAS             [ shift and go to state 33 ]
+  ! MENOS           [ shift and go to state 34 ]
+  ! POR             [ shift and go to state 35 ]
+  ! DIV             [ shift and go to state 36 ]
 
 
-state 44
+state 45
 
     (7) imprimir -> RCONSOLE PUNTO RLOG PARI expresion PARD .
 
     PTCOMA          reduce using rule 7 (imprimir -> RCONSOLE PUNTO RLOG PARI expresion PARD .)
 
 
-state 45
+state 46
 
     (8) declaracion_normal -> RLET ID DPUNTOS tipo IGUAL expresion .
     (13) expresion -> expresion . MAS expresion
@@ -687,13 +716,13 @@ state 45
     (16) expresion -> expresion . DIV expresion
 
     PTCOMA          reduce using rule 8 (declaracion_normal -> RLET ID DPUNTOS tipo IGUAL expresion .)
-    MAS             shift and go to state 32
-    MENOS           shift and go to state 33
-    POR             shift and go to state 34
-    DIV             shift and go to state 35
+    MAS             shift and go to state 33
+    MENOS           shift and go to state 34
+    POR             shift and go to state 35
+    DIV             shift and go to state 36
 
 
-state 46
+state 47
 
     (9) condicional_if -> RIF PARI expresion PARD LLAVEIZQ LLAVEDER .
 

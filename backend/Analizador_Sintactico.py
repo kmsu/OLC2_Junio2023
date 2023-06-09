@@ -117,7 +117,7 @@ def parse(inp):
     return parser.parse(inp)
 
 entrada = '''
-let a : number = 10;
+let a : number = 100;
 let b : number = a;
 console.log(b);
 '''
