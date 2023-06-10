@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { ComponentesModule } from './componentes/componentes.module';
 import { PaginasModule } from './paginas/paginas.module';
 
+//Importar httpClientModule para conectar con el servidor
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -15,7 +18,8 @@ import { PaginasModule } from './paginas/paginas.module';
     AppRoutingModule,
      //SE IMPORTA PARA TENER ACCESO GLOBAL
      ComponentesModule,
-     PaginasModule
+     PaginasModule,
+     HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

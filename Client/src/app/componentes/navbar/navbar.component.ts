@@ -8,8 +8,6 @@ import { DataService } from 'src/app/servicios/data.service';
 })
 export class NavbarComponent {
 
-  contenido: string = '';
-
   constructor( private dataService: DataService ) { }
 
   ngOnInit(): void {  }
@@ -41,6 +39,6 @@ export class NavbarComponent {
   }
 
   Limpiar(){
-    //this.dataService.limpiar$.emit("");
+    this.dataService.limpiar$.emit("");
   }
 }

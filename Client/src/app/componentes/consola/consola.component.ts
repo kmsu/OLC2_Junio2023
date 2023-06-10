@@ -14,8 +14,32 @@ export class ConsolaComponent {
 
   ngOnInit(): void {
     this.dataService.contenidoConsola$.subscribe( texto => {
+      this.contenidoConsola = '';
+      this.getData();
+    })
+
+    this.dataService.limpiar$.subscribe( texto => {
       this.contenidoConsola = texto;
-      console.log('consola: ', texto);
     })
   }
+
+  getData(){
+    this.dataService.getAnalisis().subscribe(
+      (res:any)=>{ //para poder retornar el incremental
+
+        //let arreglo:Array<any> = res.analisis;
+        /*
+        for(let val of arreglo){
+          this.contenidoConsola += "El valor de la expresion es: " + val + "\n";
+        }*/
+        
+        this.contenidoConsola = res.consola;
+      }, 
+      (err)=> {
+        console.log(err);
+      }
+    )
+  }
+
 }
+

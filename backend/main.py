@@ -24,7 +24,7 @@ def compilar():
     if request.method == "POST":
         entrada = request.data.decode("utf-8")
         entrada = json.loads(entrada)
-        print(entrada)
+        #print(entrada)
         global tmp_val
         tmp_val = entrada["codigo"]
         return redirect(url_for("salida"))
@@ -55,4 +55,4 @@ def salida():
     return json.dumps({'consola':consola, 'mensaje': 'Compilado :3'})
 
 if __name__ == '__main__':
-    app.run(debug = True, port=3000)
+    app.run(debug = True, port=8080)
