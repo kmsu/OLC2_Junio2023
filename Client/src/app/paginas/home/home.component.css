@@ -1,7 +1,62 @@
-.home {
+/*
+*{
+  background-color: NavajoWhite;
+}
+
+.datos{
+  display: inline-block;
+}
+
+.home1 {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     flex-direction: column;
-    height: 100%;
-  }
+    background-color: NavajoWhite;
+}
+
+.home2 {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  flex-direction: column;
+  background-color: NavajoWhite;
+}
+
+.home3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: NavajoWhite;
+}
+*/
+
+.contenido{
+  height: 100%;
+  background-color: NavajoWhite;
+  display: flex;
+  justify-content: center;
+}
+
+.con-datos{
+  display: inline-block;
+}
+
+.kevin{   
+  margin: 30px;
+  flex-direction: column; 
+  text-align: center;
+}
+
+.juan{
+  margin: 30px;
+  flex-direction: column; 
+  text-align: center;
+}
+
+.compi{
+  margin: 30px;
+  flex-direction: column; 
+  text-align: center;
+}
