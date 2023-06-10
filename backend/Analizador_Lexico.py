@@ -36,27 +36,27 @@ reserved = {
 
 tokens  = [
     'PUNTO',
-    'DOSPUNTOS',
+    'DPUNTOS',
     'PTCOMA',
     'PARI',
     'PARD',
     'LLAVEIZQ',
     'LLAVEDER',
-    'CORIZQ',
-    'CORDER',
+    'CORIZQ', #pendiente
+    'CORDER', #pendiente
     'MAS',
     'MENOS',
     'POR',
     'DIV',
-    'POTENCIA',
-    'MODULO',
+    'POTENCIA', # pendiente
+    'MODULO', # pendiente
     'IGUAL',
-    'MAYORQUE',
-    'MENORQUE',
+    'MAYOR',
+    'MENOR',
     'MAYORIGUAL',
     'MENORIGUAL',
-    'IGUALDAD',
-    'DISTINTO',
+    'COMPARE',
+    'DIFERENTE',
     'OR',
     'AND',
     'NOT',
@@ -66,12 +66,12 @@ tokens  = [
     'DECIMAL',
     'CADENA',
     'ID',
-    'COMILLASIMPLE',
-    'COMILLADOBLE'
+    'COMILLASIMPLE', # pendiente
+    'COMILLADOBLE' # pendiente
 ]+ list(reserved.values())
 # Tokens
 t_PUNTO         = r'\.'
-t_DOSPUNTOS     = r'\:'
+t_DPUNTOS    = r'\:'
 t_PTCOMA        = r'\;'
 t_PARI          = r'\('
 t_PARD          = r'\)'
@@ -86,16 +86,16 @@ t_DIV           = r'\/'
 t_POTENCIA      = r'\^'
 t_MODULO        = r'\%'
 t_IGUAL         = r'\='
-t_MAYORQUE      = r'\>'
-t_MENORQUE      = r'\<'
+t_MAYOR         = r'\>'
+t_MENOR         = r'\<'
 t_MAYORIGUAL    = r'\>\='
 t_MENORIGUAL    = r'\>\='
-t_IGUALDAD      = r'\=\=\='
-t_DISTINTO      = r'\!\=\='
+t_COMPARE       = r'\=\=\='
+t_DIFERENTE     = r'\!\=\='
 t_OR            = r'\|\|'
 t_AND           = r'\&\&'
 t_NOT           = r'\!'
-t_INCREMENTO    = r'++'
+t_INCREMENTO    = r'\+\+'
 t_DECREMENTO    = r'\-\-'
 t_COMILLASIMPLE = r'\'' 
 t_COMILLADOBLE  = r'\"'
