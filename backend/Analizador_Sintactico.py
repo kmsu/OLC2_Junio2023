@@ -11,7 +11,7 @@ from src.Expresiones.primitivos import Primitivos
 from src.Instrucciones.imprimir import Imprimir
 from src.Instrucciones.declaracion_variables import Declaracion_Variables
 from src.Tabla_Simbolos.tabla_simbolos import TablaSimbolos
-
+# pip freeze > requirements.txt
 # Definicion de la jerarquia de operadores
 precedence = (
     ('left', 'OR'),
