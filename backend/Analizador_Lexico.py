@@ -49,7 +49,7 @@ tokens  = [
     'POR',
     'DIV',
     'POTENCIA', # pendiente
-    'MODULO', # pendiente
+    'MOD', # pendiente
     'IGUAL',
     'MAYOR',
     'MENOR',
@@ -60,8 +60,6 @@ tokens  = [
     'OR',
     'AND',
     'NOT',
-    'INCREMENTO',
-    'DECREMENTO',
     'ENTERO',
     'DECIMAL',
     'CADENA',
@@ -84,7 +82,7 @@ t_MENOS         = r'\-'
 t_POR           = r'\*'
 t_DIV           = r'\/'
 t_POTENCIA      = r'\^'
-t_MODULO        = r'\%'
+t_MOD           = r'\%'
 t_IGUAL         = r'\='
 t_MAYOR         = r'\>'
 t_MENOR         = r'\<'
@@ -95,8 +93,6 @@ t_DIFERENTE     = r'\!\=\='
 t_OR            = r'\|\|'
 t_AND           = r'\&\&'
 t_NOT           = r'\!'
-t_INCREMENTO    = r'\+\+'
-t_DECREMENTO    = r'\-\-'
 t_COMILLASIMPLE = r'\'' 
 t_COMILLADOBLE  = r'\"'
 

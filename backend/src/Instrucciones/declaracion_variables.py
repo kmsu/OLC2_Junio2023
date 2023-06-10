@@ -14,6 +14,9 @@ class Declaracion_Variables(Abstract):
         value = self.valor.interpretar(arbol, tabla)
         if isinstance(value, Excepcion): return value # Analisis Semantico -> Error
         # Verificacion de tipos
+        if self.tipo == None:
+            self.tipo = self.valor.tipo
+
         if str(self.tipo) == str(self.valor.tipo):
             simbolo = Simbolo(str(self.ide), self.valor.tipo, value, self.fila, self.columna)
             result = tabla.setTabla(simbolo)

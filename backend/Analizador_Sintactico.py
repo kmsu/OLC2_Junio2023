@@ -20,7 +20,7 @@ precedence = (
     ('left', 'COMPARE', 'DIFERENTE'),
     ('left', 'MENOR', 'MAYOR', 'MAYORIGUAL', 'MENORIGUAL'),
     ('left','MAS','MENOS'),
-    ('left','POR','DIV'),
+    ('left','POR','DIV', 'MOD'),
     ('left','PARI', 'PARD'),
     ('right','UMENOS'),
     )
@@ -44,18 +44,16 @@ def p_instrucciones_2(t):
         t[0] = [t[1]]
 
 def p_instrucciones_evaluar(t):
-    '''instruccion : imprimir PTCOMA
-                    | declaracion_normal PTCOMA
-                    | condicional_ifs PTCOMA
-                    | cliclo_for PTCOMA'''
+    '''instruccion  : imprimir puntoycoma
+                    | declaracion_normal puntoycoma
+                    | condicional_ifs puntoycoma
+                    | cliclo_for puntoycoma'''
     t[0] = t[1]
 
-def p_instrucciones_evaluar_1(t):
-    '''instruccion : imprimir
-                    | declaracion_normal
-                    | condicional_ifs
-                    | cliclo_for'''
-    t[0] = t[1]
+def p_pcoma(t):
+    '''puntoycoma : PTCOMA
+                 | '''
+    pass
 
 def p_imprimir(t):
     'imprimir : RCONSOLE PUNTO RLOG PARI expresion PARD'
@@ -64,6 +62,10 @@ def p_imprimir(t):
 def p_declaracion_normal(t):
     'declaracion_normal : RLET ID DPUNTOS tipo IGUAL expresion'
     t[0] = Declaracion_Variables(t[2], t[4], t[6], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_declaracion_normal2(t):
+    'declaracion_normal : RLET ID IGUAL expresion'
+    t[0] = Declaracion_Variables(t[2], None, t[4], t.lineno(1), find_column(input, t.slice[1]))
 
 def p_condicional_ifs(t):
     'condicional_ifs : RIF condicional_if'
@@ -82,8 +84,16 @@ def p_condicional_if_else_if(t):
     t[0] = If(t[2], t[5], None, t[9], t.lineno(1), find_column(input, t.slice[1]))
 
 def p_ciclo_for(t):
-    'cliclo_for : RFOR PARI declaracion_normal PTCOMA expresion PTCOMA expresion PARD LLAVEIZQ instrucciones LLAVEDER'
+    'cliclo_for : RFOR PARI declaracion_for PTCOMA expresion PTCOMA expresion PARD LLAVEIZQ instrucciones LLAVEDER'
     t[0] = For(t[3], t[5], t[7], t[10], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_declaracion_for(t):
+    'declaracion_for  : declaracion_normal'
+    t[0] = t[1]
+
+def p_declaracion_for_id(t):
+    'declaracion_for  : ID'
+    t[0] = Identificador(t[1], t.lineno(1), find_column(input, t.slice[1]), None)
 
 def p_tipo(t):
     '''tipo : RSTRING
@@ -96,6 +106,8 @@ def p_expresion_binaria(t):
                 | expresion MENOS expresion
                 | expresion POR expresion
                 | expresion DIV expresion
+                | expresion MOD expresion
+                | expresion POTENCIA expresion
                 | expresion COMPARE expresion
                 | expresion DIFERENTE expresion
                 | expresion MAYOR expresion
@@ -113,6 +125,10 @@ def p_expresion_binaria(t):
         t[0] = Aritmetica(t[1], t[3], '*', t.lineno(2), find_column(input, t.slice[2]))
     elif t[2] == '/': 
         t[0] = Aritmetica(t[1], t[3], '/', t.lineno(2), find_column(input, t.slice[2]))
+    elif t[2] == '%': 
+        t[0] = Aritmetica(t[1], t[3], '%', t.lineno(2), find_column(input, t.slice[2]))
+    elif t[2] == '^': 
+        t[0] = Aritmetica(t[1], t[3], '^', t.lineno(2), find_column(input, t.slice[2]))    
     elif t[2] == '===':
         t[0] = Relacional_Logica(t[1], t[3], '===', t.lineno(2), find_column(input, t.slice[2]))
     elif t[2] == '!==':
@@ -137,6 +153,10 @@ def p_expresion_unaria(t):
         t[0] = Aritmetica(0, t[2], '-', t.lineno(1), find_column(input, t.slice[1]))
     elif t[1] == '!':
         t[0] = Relacional_Logica(t[2], None, '!', t.lineno(1), find_column(input, t.slice[1]))
+
+def p_parentesis(t):
+    'expresion : PARI expresion PARD'
+    t[0] = t[2]
 
 def p_identificador(t):
     'expresion : ID'
