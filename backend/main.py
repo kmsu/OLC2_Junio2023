@@ -52,6 +52,9 @@ def salida():
     Simbolos = ast.getTsglobal().getTablaG()
     consola = str(ast.getConsola())
     print('Consola: ', consola)
+    if ast.excepciones != None:
+        for aux in ast.excepciones:
+            print('Errores', aux.toString())
     return json.dumps({'consola':consola, 'mensaje': 'Compilado :3'})
 
 if __name__ == '__main__':

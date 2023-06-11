@@ -23,5 +23,5 @@ class Declaracion_Variables(Abstract):
             if isinstance(result, Excepcion): return result
             return None
         else:
-            result = Excepcion("Semantico", "Tipo de dato diferente declarado.", self.fila, self.columna)
+            result = Excepcion("Semantico", "se esperaba " + str(self.tipo) + " y se obtuvo " + str(self.valor.getTipo()) , self.fila, self.columna)
             return result

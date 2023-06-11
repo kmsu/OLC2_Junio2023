@@ -12,10 +12,16 @@ class Relacional_Logica(Abstract):
     
     def interpretar(self, tree, table):
         izq = self.op_izq.interpretar(tree, table)
-        if isinstance(izq, Excepcion): return izq
-        if self.op != '!':
+        if isinstance(izq, Excepcion): return izq #valido la instancia por si es identificador de variable
+
+        if self.op != '!': #Este if es porque si el operador es ! no existira el op_der
             der = self.op_der.interpretar(tree, table)
             if isinstance(der, Excepcion): return der
+            if self.op_izq.getTipo() != self.op_der.getTipo():
+                auxIzq = str(self.op_izq.getTipo())
+                auxDer = str(self.op_der.getTipo())
+                return Excepcion("Semantico", "Error de tipos: el tipo " + auxIzq + " no coincide con tipo " + auxDer , self.fila, self.columna)
+
         if self.op == '<':
             return izq < der
         elif self.op == '>':
@@ -28,12 +34,12 @@ class Relacional_Logica(Abstract):
             return izq <= der
         elif self.op == '>=':
             return izq >= der
+        elif self.op == '!':
+            return not izq
         elif self.op == '&&':
             return izq and der
         elif self.op == '||':
             return izq or der
-        elif self.op == '!':
-            return not izq
         else:
             return Excepcion("Semantico", "Operacion no valida.", self.fila, self.columna)
 

@@ -7,7 +7,9 @@ class Imprimir(Abstract):
         super().__init__(fila, columna)
     
     def interpretar(self, tree, table):
-        value = self.expresion.interpretar(tree, table)
-        print(value)
+        value = ""
+        for aux in self.expresion:
+            value += str(aux.interpretar(tree, table))
+        #print(value)
         tree.updateConsola(str(value))
         return value

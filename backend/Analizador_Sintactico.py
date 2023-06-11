@@ -56,8 +56,21 @@ def p_pcoma(t):
     pass
 
 def p_imprimir(t):
-    'imprimir : RCONSOLE PUNTO RLOG PARI expresion PARD'
+    'imprimir : RCONSOLE PUNTO RLOG PARI listaExpresion PARD'
     t[0] = Imprimir(t[5], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_imprimir_lista(t):
+    'listaExpresion  : listaExpresion COMA expresion'
+    if t[3] != "":
+        t[1].append(t[3])
+    t[0] = t[1]
+
+def p_imprimir_lista2(t):
+    'listaExpresion   : expresion'
+    if t[1] == "":
+        t[0] = []
+    else:
+        t[0] = [t[1]]
 
 def p_declaracion_normal(t):
     'declaracion_normal : RLET ID DPUNTOS tipo IGUAL expresion'
@@ -150,7 +163,8 @@ def p_expresion_unaria(t):
     '''expresion : MENOS expresion %prec UMENOS
                 | NOT expresion %prec UNOT'''
     if t[1] == '-':
-        t[0] = Aritmetica(0, t[2], '-', t.lineno(1), find_column(input, t.slice[1]))
+        cero = Primitivos('number', 0, -1, -1)
+        t[0] = Aritmetica(cero, t[2], '-', t.lineno(1), find_column(input, t.slice[1]))
     elif t[1] == '!':
         t[0] = Relacional_Logica(t[2], None, '!', t.lineno(1), find_column(input, t.slice[1]))
 

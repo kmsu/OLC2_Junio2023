@@ -37,6 +37,7 @@ reserved = {
 tokens  = [
     'PUNTO',
     'DPUNTOS',
+    'COMA',
     'PTCOMA',
     'PARI',
     'PARD',
@@ -69,7 +70,8 @@ tokens  = [
 ]+ list(reserved.values())
 # Tokens
 t_PUNTO         = r'\.'
-t_DPUNTOS    = r'\:'
+t_DPUNTOS       = r'\:'
+t_COMA          = r'\,'
 t_PTCOMA        = r'\;'
 t_PARI          = r'\('
 t_PARD          = r'\)'
@@ -87,7 +89,7 @@ t_IGUAL         = r'\='
 t_MAYOR         = r'\>'
 t_MENOR         = r'\<'
 t_MAYORIGUAL    = r'\>\='
-t_MENORIGUAL    = r'\>\='
+t_MENORIGUAL    = r'\<\='
 t_COMPARE       = r'\=\=\='
 t_DIFERENTE     = r'\!\=\='
 t_OR            = r'\|\|'
