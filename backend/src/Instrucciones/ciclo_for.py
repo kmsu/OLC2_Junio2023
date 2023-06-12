@@ -45,7 +45,7 @@ class For(Abstract):
             if self.condicion.tipo != 'boolean':
                 return Excepcion("Semantico", "Tipo de dato no booleano en FOR.", self.fila, self.columna)
         return None
-            
+           
 
 
 

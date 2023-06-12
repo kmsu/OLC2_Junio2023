@@ -12,6 +12,7 @@ class TablaSimbolos:
     def setTabla(self, simbolo):
         # Aqui va la verificacion de que no se declare una variable dos veces
         self.tabla[simbolo.getID()] = simbolo
+        print("se declaro variable " + str(simbolo.getID()))
     
     def setTablaFuncion(self, simbolo):
         self.tabla[simbolo.getID()] = simbolo
@@ -19,7 +20,7 @@ class TablaSimbolos:
     def getTabla(self, ide): # Aqui manejamos los entornos :3
         tablaActual = self
         while tablaActual != None:
-            if ide in tablaActual.tabla:
+            if ide in tablaActual.tabla: #estructura python: busca ide en la lista tabla
                 return tablaActual.tabla[ide]
             else:
                 tablaActual = tablaActual.anterior
@@ -35,7 +36,7 @@ class TablaSimbolos:
                 # tablaActual.tabla[simbolo.getID()].setTipo(simbolo.getTipo())
             else:
                 tablaActual = tablaActual.anterior
-        return Excepcion("Semantico", "Variable no encontrada.", simbolo.getFila(), simbolo.getColumna())
+        return Excepcion("Semantico", "Variable no encontrada. " + str(simbolo.getID()), simbolo.getFila(), simbolo.getColumna())
 
 
 

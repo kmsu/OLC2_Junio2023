@@ -30,6 +30,7 @@ reserved = {
     'if'            :   'RIF',
     'else'          :   'RELSE',
     'for'           :   'RFOR',
+    'of'            :   'ROF',
     'while'         :   'RWHILE'
 
 }

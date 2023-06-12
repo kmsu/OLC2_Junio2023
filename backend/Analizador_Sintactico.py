@@ -1,4 +1,5 @@
 from src.Instrucciones.ciclo_for import For
+from src.Instrucciones.ciclo_forOf import ForOf
 from src.Instrucciones.condicional_if import If
 from src.Expresiones.relacional_logica import Relacional_Logica
 from src.Expresiones.identificador import Identificador
@@ -11,7 +12,7 @@ from src.Expresiones.primitivos import Primitivos
 from src.Instrucciones.imprimir import Imprimir
 from src.Instrucciones.declaracion_variables import Declaracion_Variables
 from src.Tabla_Simbolos.tabla_simbolos import TablaSimbolos
-# pip freeze > requirements.txt
+# pip freeze > requirements.txt para instalar los requerimientos escritos en dicho archivo
 # Definicion de la jerarquia de operadores
 precedence = (
     ('left', 'OR'),
@@ -100,6 +101,11 @@ def p_ciclo_for(t):
     'cliclo_for : RFOR PARI declaracion_for PTCOMA expresion PTCOMA expresion PARD LLAVEIZQ instrucciones LLAVEDER'
     t[0] = For(t[3], t[5], t[7], t[10], t.lineno(1), find_column(input, t.slice[1]))
 
+def p_ciclo_for2(t):
+    'cliclo_for : RFOR PARI RLET ID ROF expresion PARD LLAVEIZQ instrucciones LLAVEDER'
+    declaraId = Declaracion_Variables(t[4], None, None, t.lineno(1), find_column(input, t.slice[1]))
+    t[0] = ForOf(declaraId, t[6], t[9], t.lineno(1), find_column(input, t.slice[1]))
+    
 def p_declaracion_for(t):
     'declaracion_for  : declaracion_normal'
     t[0] = t[1]

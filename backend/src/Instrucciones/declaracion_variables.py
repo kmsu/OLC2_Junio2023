@@ -25,3 +25,9 @@ class Declaracion_Variables(Abstract):
         else:
             result = Excepcion("Semantico", "se esperaba " + str(self.tipo) + " y se obtuvo " + str(self.valor.getTipo()) , self.fila, self.columna)
             return result
+        
+    def setTipo(self, tipo):
+        self.tipo = tipo
+
+    def setValor(self, valor):
+        self.valor = valor
