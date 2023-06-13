@@ -1,4 +1,5 @@
 from ..Abstract.abstract import Abstract
+from ..Tabla_Simbolos.excepcion import Excepcion
 
 class Imprimir(Abstract):
 
@@ -9,7 +10,11 @@ class Imprimir(Abstract):
     def interpretar(self, tree, table):
         value = ""
         for aux in self.expresion:
-            value += str(aux.interpretar(tree, table))
+            x = aux.interpretar(tree, table)
+            if isinstance(x, Excepcion):
+                value = x.toString()
+            else: 
+                value += str(aux.interpretar(tree, table))
         #print(value)
         tree.updateConsola(str(value))
         return value
