@@ -1,5 +1,6 @@
 from src.Instrucciones.ciclo_for import For
 from src.Instrucciones.ciclo_forOf import ForOf
+from src.Instrucciones.ciclo_while import CWhile
 from src.Instrucciones.condicional_if import If
 from src.Expresiones.relacional_logica import Relacional_Logica
 from src.Expresiones.identificador import Identificador
@@ -11,6 +12,7 @@ from src.Expresiones.aritmetica import Aritmetica
 from src.Expresiones.primitivos import Primitivos
 from src.Instrucciones.imprimir import Imprimir
 from src.Instrucciones.declaracion_variables import Declaracion_Variables
+from src.Instrucciones.asignacion import Asignacion
 from src.Tabla_Simbolos.tabla_simbolos import TablaSimbolos
 # pip freeze > requirements.txt para instalar los requerimientos escritos en dicho archivo
 # Definicion de la jerarquia de operadores
@@ -47,13 +49,16 @@ def p_instrucciones_2(t):
 def p_instrucciones_evaluar(t):
     '''instruccion  : imprimir puntoycoma
                     | declaracion_normal puntoycoma
+                    | asignacion puntoycoma
                     | condicional_ifs puntoycoma
-                    | cliclo_for puntoycoma'''
+                    | cliclo_for puntoycoma
+                    | ciclo_while puntoycoma
+                    '''
     t[0] = t[1]
 
 def p_pcoma(t):
-    '''puntoycoma : PTCOMA
-                 | '''
+    '''puntoycoma   : PTCOMA
+                    | '''
     pass
 
 def p_imprimir(t):
@@ -80,6 +85,10 @@ def p_declaracion_normal(t):
 def p_declaracion_normal2(t):
     'declaracion_normal : RLET ID IGUAL expresion'
     t[0] = Declaracion_Variables(t[2], None, t[4], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_asignacion(t):
+    'asignacion : ID IGUAL expresion'
+    t[0] = Asignacion(t[1], t[3], t.lineno(1), find_column(input, t.slice[1])) 
 
 def p_condicional_ifs(t):
     'condicional_ifs : RIF condicional_if'
@@ -113,6 +122,10 @@ def p_declaracion_for(t):
 def p_declaracion_for_id(t):
     'declaracion_for  : ID'
     t[0] = Identificador(t[1], t.lineno(1), find_column(input, t.slice[1]), None)
+
+def p_ciclo_while(t):
+    'ciclo_while  : RWHILE PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER'
+    t[0] = CWhile(t[3], t[6], t.lineno(1), find_column(input, t.slice[1]))   
 
 def p_tipo(t):
     '''tipo : RSTRING
