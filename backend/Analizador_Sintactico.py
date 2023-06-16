@@ -14,7 +14,8 @@ from src.Instrucciones.imprimir import Imprimir
 from src.Instrucciones.declaracion_variables import Declaracion_Variables
 from src.Instrucciones.asignacion import Asignacion
 from src.Tabla_Simbolos.tabla_simbolos import TablaSimbolos
-# pip freeze > requirements.txt para instalar los requerimientos escritos en dicho archivo
+# pip freeze > requirements.txt para crear el archivo de requerimientos 
+# pip install -r requirements.txt para instalar los requerimientos del archivo requirements.txt
 # Definicion de la jerarquia de operadores
 precedence = (
     ('left', 'OR'),
