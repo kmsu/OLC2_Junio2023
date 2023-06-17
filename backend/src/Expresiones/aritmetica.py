@@ -61,7 +61,7 @@ class Aritmetica(Abstract):
                 return Excepcion("Semantico", "No es posible obtener el modulo de " + str(self.op_izq.getTipo()) + " con " + str(self.op_der.getTipo()) , self.fila, self.columna)
             
         elif self.op == '^':
-            if self.op_izq.getTipo() == 'number':
+            if self.op_der.getTipo() == 'number':
                 self.tipo = 'number'
                 return izq ** der
             else:

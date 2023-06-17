@@ -11,6 +11,7 @@ class Llamada_Funcion(Abstract):
 
     def interpretar(self, arbol, tabla):
         result = arbol.getFuncion(self.nombre)
+        print(str(result) + " result en llamada funcion")
         if result == None:
             return Excepcion("Semantico", "No se encontro la funcion en llamada_funcion: " + str(self.nombre), str(self.fila), str(self.columna))
         entorno = TablaSimbolos(arbol.getTsglobal())

@@ -27,6 +27,7 @@ precedence = (
     ('left', 'MENOR', 'MAYOR', 'MAYORIGUAL', 'MENORIGUAL'),
     ('left','MAS','MENOS'),
     ('left','POR','DIV', 'MOD'),
+    ('right', 'POTENCIA'),
     ('left','PARI', 'PARD'),
     ('right','UMENOS'),
     )
@@ -57,7 +58,7 @@ def p_instrucciones_evaluar(t):
                     | cliclo_for puntoycoma
                     | ciclo_while puntoycoma
                     | funcion puntoycoma
-                    | llamada_funcion puntoycoma
+                    
                     '''
     t[0] = t[1]
 
