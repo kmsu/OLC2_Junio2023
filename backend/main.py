@@ -1,6 +1,10 @@
 # CORS -> Cross Origin Resource Sharing
 # Si no existe el CORS, no se puede acceder a los recursos de un servidor desde otro servidor
 from Analizador_Sintactico import parse as Analizar
+from src.Instrucciones.funcion import Funcion
+from src.Expresiones.identificador import Identificador
+from src.Instrucciones.llamada_funcion import Llamada_Funcion
+from src.Instrucciones.imprimir import Imprimir
 from src.Tabla_Simbolos.arbol import Arbol
 from src.Tabla_Simbolos.excepcion import Excepcion
 from src.Tabla_Simbolos.tabla_simbolos import TablaSimbolos
@@ -43,10 +47,21 @@ def salida():
     for error in errores:
         ast.setExcepciones(error)
 
+    # for instruccion in ast.getInstr():
+    #     value = instruccion.interpretar(ast, TsgGlobal)
+    #     if isinstance(value, Excepcion):
+    #         ast.setExcepciones(value)
+
     for instruccion in ast.getInstr():
         value = instruccion.interpretar(ast, TsgGlobal)
-        if isinstance(value, Excepcion):
-            ast.setExcepciones(value)
+        if isinstance(value, Funcion):
+            ast.setFunciones(instruccion)
+    
+    for instruccion in ast.getInstr():
+        if not(isinstance(instruccion, Funcion)):
+            value = instruccion.interpretar(ast, TsgGlobal)
+            if isinstance(value, Excepcion):
+                ast.setExcepciones(value)
 
     global Simbolos
     Simbolos = ast.getTsglobal().getTablaG()

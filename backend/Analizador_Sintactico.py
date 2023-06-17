@@ -1,3 +1,5 @@
+from src.Instrucciones.llamada_funcion import Llamada_Funcion
+from src.Instrucciones.funcion import Funcion
 from src.Instrucciones.ciclo_for import For
 from src.Instrucciones.ciclo_forOf import ForOf
 from src.Instrucciones.ciclo_while import CWhile
@@ -54,6 +56,8 @@ def p_instrucciones_evaluar(t):
                     | condicional_ifs puntoycoma
                     | cliclo_for puntoycoma
                     | ciclo_while puntoycoma
+                    | funcion puntoycoma
+                    | llamada_funcion puntoycoma
                     '''
     t[0] = t[1]
 
@@ -127,6 +131,14 @@ def p_declaracion_for_id(t):
 def p_ciclo_while(t):
     'ciclo_while  : RWHILE PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER'
     t[0] = CWhile(t[3], t[6], t.lineno(1), find_column(input, t.slice[1]))   
+
+def p_funcion(t):
+    'funcion : RFUNCTION ID PARI PARD LLAVEIZQ instrucciones LLAVEDER'
+    t[0] = Funcion(t[2],None,t[6], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_llamada_funcion(t):
+    'llamada_funcion : ID PARI PARD'
+    t[0] = Llamada_Funcion(t[1],None,t.lineno(1), find_column(input, t.slice[1]))
 
 def p_tipo(t):
     '''tipo : RSTRING
