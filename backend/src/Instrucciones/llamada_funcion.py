@@ -15,9 +15,9 @@ class Llamada_Funcion(Abstract):
         if result == None:
             return Excepcion("Semantico", "No se encontro la funcion en llamada_funcion: " + str(self.nombre), str(self.fila), str(self.columna))
         entorno = TablaSimbolos(arbol.getTsglobal())
-        if len(self.parametros) == len(result.parametros):
+        #if len(self.parametros) == len(result.parametros):
             # aqui se hace la declaracion de los parametros
-            pass
+        #    pass
 
         value = result.interpretar(arbol, entorno) # me puede retornar un valor
         if isinstance(value, Excepcion): return value

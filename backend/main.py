@@ -23,6 +23,7 @@ CORS(app)
 def saludo():
     return {"mensaje": "Hola mundo!"}
 
+
 @app.route('/compilar', methods = ["POST","GET"])
 def compilar():
     if request.method == "POST":
@@ -31,6 +32,7 @@ def compilar():
         #print(entrada)
         global tmp_val
         tmp_val = entrada["codigo"]
+        #print(tmp_val)
         return redirect(url_for("salida"))
     else:
         return {"mensaje": "No compilado"}
@@ -38,6 +40,7 @@ def compilar():
 @app.route('/salida')
 def salida():
     global tmp_val
+    #print(tmp_val)
     global Tabla
     Tabla = {}
     instrucciones = Analizar(tmp_val)

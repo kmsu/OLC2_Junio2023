@@ -58,7 +58,7 @@ def p_instrucciones_evaluar(t):
                     | cliclo_for puntoycoma
                     | ciclo_while puntoycoma
                     | funcion puntoycoma
-                    
+                    | llamada_funcion puntoycoma
                     '''
     t[0] = t[1]
 
