@@ -1,3 +1,4 @@
+from src.Instrucciones._return import Return
 from src.Instrucciones.llamada_funcion import Llamada_Funcion
 from src.Instrucciones.funcion import Funcion
 from src.Instrucciones.ciclo_for import For
@@ -59,6 +60,7 @@ def p_instrucciones_evaluar(t):
                     | ciclo_while puntoycoma
                     | funcion puntoycoma
                     | llamada_funcion puntoycoma
+                    | r_return puntoycoma
                     '''
     t[0] = t[1]
 
@@ -140,6 +142,15 @@ def p_funcion(t):
 def p_llamada_funcion(t):
     'llamada_funcion : ID PARI PARD'
     t[0] = Llamada_Funcion(t[1],None,t.lineno(1), find_column(input, t.slice[1]))
+
+def p_expresion_funcion(t):
+    'expresion : llamada_funcion'
+    t[0] = t[1]
+
+def p_return(t):
+    'r_return : RRETURN expresion'
+    t[0] = Return(t[2], t.lineno(1), find_column(input, t.slice[1]))
+
 
 def p_tipo(t):
     '''tipo : RSTRING

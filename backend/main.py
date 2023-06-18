@@ -8,6 +8,8 @@ from src.Instrucciones.imprimir import Imprimir
 from src.Tabla_Simbolos.arbol import Arbol
 from src.Tabla_Simbolos.excepcion import Excepcion
 from src.Tabla_Simbolos.tabla_simbolos import TablaSimbolos
+from src.Instrucciones.declaracion_variables import Declaracion_Variables
+from src.Tabla_Simbolos.simbolo import Simbolo
 from Analizador_Lexico import errores, tokens, lexer
 from flask import Flask, request
 import json
@@ -59,6 +61,8 @@ def salida():
         #value = instruccion.interpretar(ast, TsgGlobal)
         if isinstance(instruccion, Funcion):
             ast.setFunciones(instruccion)
+        # if isinstance(instruccion, Declaracion_Variables):
+        #     simbolo = Simbolo(str(self.ide), self.valor.tipo, value, self.fila, self.columna)
     
     for instruccion in ast.getInstr():
         if not(isinstance(instruccion, Funcion)):

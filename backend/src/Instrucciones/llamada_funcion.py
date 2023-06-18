@@ -11,15 +11,15 @@ class Llamada_Funcion(Abstract):
 
     def interpretar(self, arbol, tabla):
         result = arbol.getFuncion(self.nombre)
-        print(str(result) + " result en llamada funcion")
         if result == None:
-            return Excepcion("Semantico", "No se encontro la funcion en llamada_funcion: " + str(self.nombre), str(self.fila), str(self.columna))
+            return Excepcion("Semantico", "No se encontro la funcion: " + str(self.nombre), str(self.fila), str(self.columna))
         entorno = TablaSimbolos(arbol.getTsglobal())
-        #if len(self.parametros) == len(result.parametros):
-            # aqui se hace la declaracion de los parametros
-        #    pass
+        # if len(self.parametros) == len(result.parametros): 
+        #     # aqui se hace la declaracion de los parametros
+        #     pass
 
         value = result.interpretar(arbol, entorno) # me puede retornar un valor
+
         if isinstance(value, Excepcion): return value
-        #self.tipo = result.tipo
+        self.tipo = result.tipo
         return value
