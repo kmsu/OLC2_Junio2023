@@ -26,7 +26,7 @@ precedence = (
     ('right','UNOT'),
     ('left', 'COMPARE', 'DIFERENTE'),
     ('left', 'MENOR', 'MAYOR', 'MAYORIGUAL', 'MENORIGUAL'),
-    ('left','MAS','MENOS'),
+    ('left','MAS','MENOS', 'COMA'),
     ('left','POR','DIV', 'MOD'),
     ('right', 'POTENCIA'),
     ('left','PARI', 'PARD'),
@@ -136,15 +136,56 @@ def p_ciclo_while(t):
     t[0] = CWhile(t[3], t[6], t.lineno(1), find_column(input, t.slice[1]))   
 
 def p_funcion(t):
-    'funcion : RFUNCTION ID PARI PARD LLAVEIZQ instrucciones LLAVEDER'
-    t[0] = Funcion(t[2],None,t[6], t.lineno(1), find_column(input, t.slice[1]))
+    '''funcion  : RFUNCTION ID PARI PARD LLAVEIZQ instrucciones LLAVEDER
+                | RFUNCTION ID PARI parametros PARD LLAVEIZQ instrucciones LLAVEDER'''
+    #len(t) == 8 evalua el numero de elementos en la produccion incluyendo el no terminal de la izquierda
+    if len(t) == 8:
+        t[0] = Funcion(t[2], None, t[6], t.lineno(1), find_column(input, t.slice[1]))
+    else:
+        t[0] = Funcion(t[2], t[4], t[7], t.lineno(1), find_column(input, t.slice[1]))
 
 def p_llamada_funcion(t):
-    'llamada_funcion : ID PARI PARD'
-    t[0] = Llamada_Funcion(t[1],None,t.lineno(1), find_column(input, t.slice[1]))
+    '''llamada_funcion  : ID PARI PARD
+                        | ID PARI parametros_ll PARD''' 
+    # (let nombre: string, let apellido: string, let edad: number)
+    if len(t) == 4:
+        t[0] = Llamada_Funcion(t[1],None,t.lineno(1), find_column(input, t.slice[1]))
+    else:
+        t[0] = Llamada_Funcion(t[1], t[3], t.lineno(1), find_column(input, t.slice[1]))
 
-def p_expresion_funcion(t):
-    'expresion : llamada_funcion'
+#parametros de la funcion
+def p_parametros(t):
+    'parametros : parametros COMA parametro'
+    t[1].append(t[3])
+    t[0] = t[1]
+
+def p_parametros_2(t):
+    'parametros : parametro'
+    t[0] = [t[1]]
+
+def p_parametro(t):
+    '''parametro    : RLET ID DPUNTOS tipo  
+                    | ID DPUNTOS tipo
+                    | ID'''
+    if len(t) == 2:
+        t[0] = {'tipo': 'any', 'id': t[1]}
+    elif len(t) == 4:
+        t[0] = {'tipo': t[3], 'id': t[1]}
+    else:
+        t[0] = {'tipo': t[4], 'id': t[2]}
+
+#parametros de la llamada de la funcion
+def p_parametros_ll(t):
+    'parametros_ll : parametros_ll COMA parametro_ll'
+    t[1].append(t[3])
+    t[0] = t[1]
+
+def p_parametros_ll_2(t):
+    'parametros_ll : parametro_ll'
+    t[0] = [t[1]]
+
+def p_parametro_ll(t):
+    '''parametro_ll : expresion'''
     t[0] = t[1]
 
 def p_return(t):
@@ -249,6 +290,10 @@ def p_expresion_incrementable(t):
     else:
         incrementable = Primitivos('number', 1, t.lineno(2), find_column(input, t.slice[2]))
         t[0] = Aritmetica(t[1],incrementable, '-', t.lineno(2), find_column(input, t.slice[2]))
+
+def p_expresion_funcion(t):
+    'expresion : llamada_funcion'
+    t[0] = t[1]
 
 def p_error(t):
     print(" Error sintáctico en '%s'" % t.value)

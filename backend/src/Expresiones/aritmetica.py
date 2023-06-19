@@ -13,7 +13,9 @@ class Aritmetica(Abstract):
     def interpretar(self, tree, table): 
             
         izq = self.op_izq.interpretar(tree, table)
+        if isinstance(izq, Excepcion): return izq
         der = self.op_der.interpretar(tree, table)
+        if isinstance(der, Excepcion): return der
 
         if self.op_izq.getTipo() != self.op_der.getTipo():
             return Excepcion("Semantico", "Error de tipos: el tipo " + str(self.op_izq.getTipo()) + " no coincide con tipo " + str(self.op_der.getTipo()) , self.fila, self.columna)

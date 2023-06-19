@@ -16,3 +16,6 @@ class Return(Abstract):
         self.tipo = self.expresion.tipo
         self.value = result
         return self
+    
+    def getTipo(self):
+        return self.tipo

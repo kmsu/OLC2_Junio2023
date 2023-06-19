@@ -61,8 +61,7 @@ def salida():
         #value = instruccion.interpretar(ast, TsgGlobal)
         if isinstance(instruccion, Funcion):
             ast.setFunciones(instruccion)
-        # if isinstance(instruccion, Declaracion_Variables):
-        #     simbolo = Simbolo(str(self.ide), self.valor.tipo, value, self.fila, self.columna)
+        
     
     for instruccion in ast.getInstr():
         if not(isinstance(instruccion, Funcion)):
