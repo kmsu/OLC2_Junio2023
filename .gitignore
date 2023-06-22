@@ -1,2 +1,6 @@
 backend/__pycache__
 backend\ply\__pycache__
+backend\src\Abstract\__pycache__
+backend\src\Expresiones\__pycache__
+backend\src\Instrucciones\__pycache__
+backend\src\Tabla_Simbolos\__pycache__

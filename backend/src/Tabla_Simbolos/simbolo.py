@@ -22,11 +22,16 @@ class Simbolo():
     def getValor(self):
         return self.valor
     
-    # Aqui va lo del array :3
-    
     def setValor(self, valor):
         self.valor = valor
     
+     # Aqui va lo del array :3
+    def getValorArreglo(self, indice):
+        return self.valor[indice]
+    
+    def setValorArreglo(self, indice, value):
+        self.valor[indice] = value
+
     def getFila(self):
         return self.fila
     

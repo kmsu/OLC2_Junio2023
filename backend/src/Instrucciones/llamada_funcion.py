@@ -8,6 +8,7 @@ class Llamada_Funcion(Abstract):
     def __init__(self, nombre, parametros, fila, columna):
         self.nombre = nombre
         self.parametros = parametros
+        #self.tipo = None
         super().__init__(fila, columna)
 
     def interpretar(self, arbol, tabla):

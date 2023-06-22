@@ -1,3 +1,4 @@
+from src.Instrucciones.arregloOperacion import ArregloOperacion
 from src.Instrucciones._return import Return
 from src.Instrucciones.llamada_funcion import Llamada_Funcion
 from src.Instrucciones.funcion import Funcion
@@ -7,6 +8,7 @@ from src.Instrucciones.ciclo_while import CWhile
 from src.Instrucciones.condicional_if import If
 from src.Expresiones.relacional_logica import Relacional_Logica
 from src.Expresiones.identificador import Identificador
+from src.Expresiones.arreglo import Arreglo
 from src.Tabla_Simbolos.arbol import Arbol
 from src.Tabla_Simbolos.excepcion import Excepcion
 import ply.yacc as yacc
@@ -28,8 +30,8 @@ precedence = (
     ('left', 'MENOR', 'MAYOR', 'MAYORIGUAL', 'MENORIGUAL'),
     ('left','MAS','MENOS', 'COMA'),
     ('left','POR','DIV', 'MOD'),
-    ('right', 'POTENCIA'),
     ('left','PARI', 'PARD'),
+    ('right', 'POTENCIA'),
     ('right','UMENOS'),
     )
 
@@ -61,6 +63,7 @@ def p_instrucciones_evaluar(t):
                     | funcion puntoycoma
                     | llamada_funcion puntoycoma
                     | r_return puntoycoma
+                    | arreglo puntoycoma
                     '''
     t[0] = t[1]
 
@@ -89,6 +92,12 @@ def p_imprimir_lista2(t):
 def p_declaracion_normal(t):
     'declaracion_normal : RLET ID DPUNTOS tipo IGUAL expresion'
     t[0] = Declaracion_Variables(t[2], t[4], t[6], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_tipo(t):
+    '''tipo : RSTRING
+            | RNUMBER
+            | RBOOLEAN'''
+    t[0] = t[1]
 
 def p_declaracion_normal2(t):
     'declaracion_normal : RLET ID IGUAL expresion'
@@ -192,12 +201,30 @@ def p_return(t):
     'r_return : RRETURN expresion'
     t[0] = Return(t[2], t.lineno(1), find_column(input, t.slice[1]))
 
+def p_arreglos(t):
+    'arreglo    : CORIZQ listaExpresion CORDER'
+    t[0] = Arreglo(t[2], t.lineno(1), find_column(input, t.slice[1]))
 
-def p_tipo(t):
-    '''tipo : RSTRING
-            | RNUMBER
-            | RBOOLEAN'''
+def p_arreglos_operacion(t):
+    'arreglo    : ID listaindices'
+    t[0] = ArregloOperacion(t[1], t[2], None, t.lineno(1), find_column(input, t.slice[1]))
+
+def p_arreglos_operacion2(t):
+    'arreglo    : ID listaindices IGUAL expresion'
+    t[0] = ArregloOperacion(t[1], t[2], t[4], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_lista_indices(t):
+    'listaindices   : listaindices CORIZQ expresion CORDER'
+    if t[3] != "":
+        t[1].append(t[3])
     t[0] = t[1]
+
+def p_lista_indices2(t):
+    'listaindices   : CORIZQ expresion CORDER'
+    if t[2] == "":
+        t[0] = []
+    else:
+        t[0] = [t[2]]
 
 def p_expresion_binaria(t):
     '''expresion : expresion MAS expresion
@@ -295,8 +322,13 @@ def p_expresion_funcion(t):
     'expresion : llamada_funcion'
     t[0] = t[1]
 
+def p_expresion_arreglo(t):
+    'expresion : arreglo'
+    t[0] = t[1]
+
 def p_error(t):
     print(" Error sintáctico en '%s'" % t.value)
+    #print("Error sintáctico en {}, en linea {}, en columna {}".format(t.value,  str(t.lineno(1)), str(find_column(input, t.slice[1]))))
 
 input = ''
 

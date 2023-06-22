@@ -16,5 +16,5 @@ class Imprimir(Abstract):
             else: 
                 value += str(aux.interpretar(tree, table))
         #print(value)
-        tree.updateConsola(str(value))
+        tree.updateConsola(str(value)) #envia a la consola del main por medio de la clase arbol, cadenas para imprimir en consola.
         return value
