@@ -32,14 +32,7 @@ class Arreglo(Abstract):
         return self.tipo
 
     def getlstExpresiones(self):
-        #return self.lstTipos[val]
         return self.lstTipos
     
     def getValor(self):
-        #return self.valores[val] 
         return self.valores
-    
-    def operar(self, id, lstIndice, valor):
-        
-        
-        return None

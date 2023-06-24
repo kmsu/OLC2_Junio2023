@@ -24,7 +24,7 @@ class ArregloOperacion(Abstract):
             
             tmp = simbolo.getValor() #arreglo de valores
             tmp2 = simbolo.getValorArreglo() #arreglo de tipos 
-            tmp3 = simbolo.getValor() #arreglo de valores
+            tmp3 = simbolo.getValor() #para mantener el arreglo sin modificaciones
             pos = 0
             i = 0
             while i<len(self.lstIndice):
@@ -57,13 +57,7 @@ class ArregloOperacion(Abstract):
                 pos = self.lstIndice[i].interpretar(arbol, tabla)
                 if isinstance(pos, Excepcion): return pos
                 if(self.lstIndice[i].getTipo() == 'number'):
-                    pos = int(pos)
-                    #aqui tendríamos que devolver una excepcion si fuera un decimal
-                    # if(i<len(self.lstIndice) -1 ):
-                    #     tmp = tmp[pos]
-                    #     tmp2 = tmp2[pos]
-                    #     print("este es tmp en el if de indices en arreglo op " + str(tmp))
-                        
+                    pos = int(pos)                        
                 i = i + 1
                 tmp = tmp[pos]
                 tmp2 = tmp2[pos]
