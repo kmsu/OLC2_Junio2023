@@ -22,8 +22,9 @@ class ArregloOperacion(Abstract):
             if isinstance(val, Excepcion): return val
             tipoval = self.valor.getTipo()
             
-            tmp = simbolo.getValor() 
-            tmp2 = simbolo.getValor() 
+            tmp = simbolo.getValor() #arreglo de valores
+            tmp2 = simbolo.getValorArreglo() #arreglo de tipos 
+            tmp3 = simbolo.getValor() #arreglo de valores
             pos = 0
             i = 0
             while i<len(self.lstIndice):
@@ -32,11 +33,14 @@ class ArregloOperacion(Abstract):
                 if(self.lstIndice[i].getTipo() == 'number'):
                     pos = int(pos)
                     #aqui tendríamos que devolver una excepcion si fuera un decimal
-                    if(i<len(self.lstIndice) -1 ):tmp = tmp[pos]
+                    if(i<len(self.lstIndice) -1 ):
+                        tmp = tmp[pos]
+                        tmp2 = tmp2[pos]
                 i = i + 1
             
             tmp[pos] = val
-            nuevoSimbolo = Simbolo(str(self.id), 'arreglo', tmp2, None, self.fila, self.columna)
+            tmp2[pos] = tipoval
+            nuevoSimbolo = Simbolo(str(self.id), 'arreglo', tmp3, tmp2, self.fila, self.columna)
             result = tabla.updateTabla(nuevoSimbolo)
             if isinstance(result, Excepcion): return result
         
@@ -62,19 +66,12 @@ class ArregloOperacion(Abstract):
                         
                 i = i + 1
                 tmp = tmp[pos]
-                print("TMP1 " + str(tmp)) 
                 tmp2 = tmp2[pos]
-                print("TMP2 " + str(tmp2)) 
-                #tmp2 = tmp2[pos]
-                #self.tipo = tmp2[pos]
-            self.tipo = tmp2
-            
 
-            print("esto viene en self tipo " + str(self.tipo))
+            self.tipo = tmp2
 
             return tmp #no deberia retornar el numero, sino una expresion 
-                
-        
+                       
         return None
             
     def getTipo(self):
