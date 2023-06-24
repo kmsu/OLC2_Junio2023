@@ -36,7 +36,7 @@ class ArregloOperacion(Abstract):
                 i = i + 1
             
             tmp[pos] = val
-            nuevoSimbolo = Simbolo(str(self.id), 'arreglo', tmp2, self.fila, self.columna)
+            nuevoSimbolo = Simbolo(str(self.id), 'arreglo', tmp2, None, self.fila, self.columna)
             result = tabla.updateTabla(nuevoSimbolo)
             if isinstance(result, Excepcion): return result
         
@@ -44,8 +44,9 @@ class ArregloOperacion(Abstract):
             #getValor
             #traemos el simbolo (variable) que contiene el arreglo
             simbolo = tabla.getTabla(self.id)
-            tmp = simbolo.getValor() 
-            tmp2 = simbolo.getValor() 
+            
+            tmp = simbolo.getValor()
+            tmp2 = simbolo.getValorArreglo()
             pos = 0
             i = 0
             while i<len(self.lstIndice):
@@ -54,15 +55,22 @@ class ArregloOperacion(Abstract):
                 if(self.lstIndice[i].getTipo() == 'number'):
                     pos = int(pos)
                     #aqui tendríamos que devolver una excepcion si fuera un decimal
-                    if(i<len(self.lstIndice) -1 ):
-                        tmp = tmp[pos]
-                        print("este es tmp en el if de indices en arreglo op " + str(tmp))
-                        #tmp2 = tmp[pos]
-                        #self.tipo = tmp2
+                    # if(i<len(self.lstIndice) -1 ):
+                    #     tmp = tmp[pos]
+                    #     tmp2 = tmp2[pos]
+                    #     print("este es tmp en el if de indices en arreglo op " + str(tmp))
                         
                 i = i + 1
-            #tmp = tmp[pos]
-            print("esto viene en el tmp2 " + str(tmp2))
+                tmp = tmp[pos]
+                print("TMP1 " + str(tmp)) 
+                tmp2 = tmp2[pos]
+                print("TMP2 " + str(tmp2)) 
+                #tmp2 = tmp2[pos]
+                #self.tipo = tmp2[pos]
+            self.tipo = tmp2
+            
+
+            print("esto viene en self tipo " + str(self.tipo))
 
             return tmp #no deberia retornar el numero, sino una expresion 
                 

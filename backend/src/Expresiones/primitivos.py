@@ -12,3 +12,6 @@ class Primitivos(Abstract):
 
     def getTipo(self):
         return self.tipo
+    
+    def getValor(self):
+        return self.valor

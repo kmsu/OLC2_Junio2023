@@ -33,7 +33,7 @@ class For(Abstract):
             nuevo_valor = self.aumento.interpretar(arbol, nuevaTabla)
             if isinstance(nuevo_valor, Excepcion): return nuevo_valor
             
-            simbolo = Simbolo(self.inicio.ide, self.inicio.tipo, nuevo_valor, self.fila, self.columna)
+            simbolo = Simbolo(self.inicio.ide, self.inicio.tipo, nuevo_valor, None, self.fila, self.columna)
 
             # Actualizando el valor de la variable en la tabla de simbolos
             valor = nuevaTabla.updateTabla(simbolo)

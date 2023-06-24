@@ -12,7 +12,6 @@ class Declaracion_Variables(Abstract):
     
     def interpretar(self, arbol, tabla):
         value = self.valor.interpretar(arbol, tabla)
-        print("valor de la expresion en declaracion " + str(self.valor))
         if isinstance(value, Excepcion): return value # Analisis Semantico -> Error
         # Verificacion de tipos
 
@@ -21,7 +20,11 @@ class Declaracion_Variables(Abstract):
             self.tipo = self.valor.tipo
 
         if str(self.tipo) == str(self.valor.tipo):
-            simbolo = Simbolo(str(self.ide), self.valor.tipo, value, self.fila, self.columna)
+            if(self.valor.tipo == 'arreglo'):
+                print("Arreglo de tipos desde declaracion " + str(self.valor.getlstExpresiones()))
+                simbolo = Simbolo(str(self.ide), self.valor.tipo, value, self.valor.getlstExpresiones(), self.fila, self.columna)
+            else:
+                simbolo = Simbolo(str(self.ide), self.valor.tipo, value, None, self.fila, self.columna)
             result = tabla.setTabla(simbolo)
             if isinstance(result, Excepcion): return result
             return None

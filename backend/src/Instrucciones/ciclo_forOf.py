@@ -34,7 +34,7 @@ class ForOf(Abstract):
             i = 0
             while i<len(expresion):
                 nuevo_valor = expresion[i]               
-                simbolo = Simbolo(self.variable.ide, self.variable.tipo, nuevo_valor, self.fila, self.columna)
+                simbolo = Simbolo(self.variable.ide, self.variable.tipo, nuevo_valor, None, self.fila, self.columna)
                 # Actualizando el valor de la variable en la tabla de simbolos
                 valor = nuevaTabla.updateTabla(simbolo)
                 if isinstance(valor, Excepcion): return valor

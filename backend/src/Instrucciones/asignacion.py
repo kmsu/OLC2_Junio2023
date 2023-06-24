@@ -20,7 +20,7 @@ class Asignacion(Abstract):
             tipoVariable = self.valor.tipo
 
         if str(tipoVariable) == str(self.valor.tipo):
-            simbolo = Simbolo(str(self.ide), self.valor.tipo, value, self.fila, self.columna)
+            simbolo = Simbolo(str(self.ide), self.valor.tipo, value, None, self.fila, self.columna)
             result = tabla.updateTabla(simbolo)
             if isinstance(result, Excepcion): return result
             return None

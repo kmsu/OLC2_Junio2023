@@ -63,7 +63,7 @@ def p_instrucciones_evaluar(t):
                     | funcion puntoycoma
                     | llamada_funcion puntoycoma
                     | r_return puntoycoma
-                    | arreglo puntoycoma
+                    | asignaArreglo puntoycoma
                     '''
     t[0] = t[1]
 
@@ -201,30 +201,6 @@ def p_return(t):
     'r_return : RRETURN expresion'
     t[0] = Return(t[2], t.lineno(1), find_column(input, t.slice[1]))
 
-def p_arreglos(t):
-    'arreglo    : CORIZQ listaExpresion CORDER'
-    t[0] = Arreglo(t[2], t.lineno(1), find_column(input, t.slice[1]))
-
-def p_arreglos_operacion(t):
-    'arreglo    : ID listaindices'
-    t[0] = ArregloOperacion(t[1], t[2], None, t.lineno(1), find_column(input, t.slice[1]))
-
-def p_arreglos_operacion2(t):
-    'arreglo    : ID listaindices IGUAL expresion'
-    t[0] = ArregloOperacion(t[1], t[2], t[4], t.lineno(1), find_column(input, t.slice[1]))
-
-def p_lista_indices(t):
-    'listaindices   : listaindices CORIZQ expresion CORDER'
-    if t[3] != "":
-        t[1].append(t[3])
-    t[0] = t[1]
-
-def p_lista_indices2(t):
-    'listaindices   : CORIZQ expresion CORDER'
-    if t[2] == "":
-        t[0] = []
-    else:
-        t[0] = [t[2]]
 
 def p_expresion_binaria(t):
     '''expresion : expresion MAS expresion
@@ -323,8 +299,32 @@ def p_expresion_funcion(t):
     t[0] = t[1]
 
 def p_expresion_arreglo(t):
-    'expresion : arreglo'
+    'expresion : CORIZQ listaExpresion CORDER'
+    t[0] = Arreglo(t[2], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_arreglos_operacion(t):
+    'expresion : ID listaindices'
+    t[0] = ArregloOperacion(t[1], t[2], None, t.lineno(1), find_column(input, t.slice[1]))
+
+#arreglo es asignacion del arreglo
+def p_arreglos_operacion2(t):
+    'asignaArreglo    : ID listaindices IGUAL expresion'
+    t[0] = ArregloOperacion(t[1], t[2], t[4], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_lista_indices(t):
+    'listaindices   : listaindices CORIZQ expresion CORDER'
+    if t[3] != "":
+        t[1].append(t[3])
     t[0] = t[1]
+
+def p_lista_indices2(t):
+    'listaindices   : CORIZQ expresion CORDER'
+    if t[2] == "":
+        t[0] = []
+    else:
+        t[0] = [t[2]]
+
+
 
 def p_error(t):
     print(" Error sintáctico en '%s'" % t.value)

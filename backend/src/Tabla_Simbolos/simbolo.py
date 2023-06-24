@@ -1,9 +1,10 @@
 class Simbolo():
-
-    def __init__(self, ide, tipo, valor, fila, columna):
+    #arregloTipos me sirve para guardar un arreglo de los tipos de los elementos del arreglo que este reconociendo
+    def __init__(self, ide, tipo, valor, arregloTipos, fila, columna):
         self.ide = ide
         self.tipo = tipo
         self.valor = valor
+        self.arregloTipos = arregloTipos
         self.fila = fila
         self.columna = columna
     
@@ -26,8 +27,11 @@ class Simbolo():
         self.valor = valor
     
      # Aqui va lo del array :3
-    def getValorArreglo(self, indice):
-        return self.valor[indice]
+    # def getValorArreglo(self, indice):
+    #     return self.valor[indice]
+
+    def getValorArreglo(self):
+        return self.arregloTipos
     
     def setValorArreglo(self, indice, value):
         self.valor[indice] = value
