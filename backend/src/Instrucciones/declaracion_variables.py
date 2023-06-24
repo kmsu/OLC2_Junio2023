@@ -30,14 +30,21 @@ class Declaracion_Variables(Abstract):
             return None
         elif str(self.valor.tipo) == 'arreglo':
             i = 0
+            print(str(self.valor.getlstExpresiones()) + " lista tipos")
             for x in self.valor.getlstExpresiones():
-                if(x[i] != self.tipo):
+                if(x != self.tipo):
                     print("tipo de los elementos no coincide con el tipo del arreglo")
                     respuesta = [] 
                     simbolo = Simbolo(str(self.ide), self.valor.tipo, respuesta, respuesta, self.fila, self.columna)
                     result = tabla.setTabla(simbolo)
                     if isinstance(result, Excepcion): return result
                     return None
+                
+                i = i + 1
+            simbolo = Simbolo(str(self.ide), self.valor.tipo, value, self.valor.getlstExpresiones(), self.fila, self.columna)
+            result = tabla.setTabla(simbolo)
+            if isinstance(result, Excepcion): return result
+            return None
 
         else:
             result = Excepcion("Semantico", "se esperaba " + str(self.tipo) + " y se obtuvo " + str(self.valor.getTipo()) , self.fila, self.columna)
