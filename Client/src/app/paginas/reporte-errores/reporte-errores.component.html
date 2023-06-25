@@ -1,1 +1,11 @@
-<p>reporte-errores works!</p>
+<h1>REPORTE ERRORES</h1>
+<table class="table table-success table-striped">
+    <thead> <tr >  <th>Tipo</th> <th>Fila</th> <th>Columna</th> <th>Descripcion</th> </tr></thead>
+    
+    <tbody><tr  *ngFor="let RError of Reporte" > 
+        <td>{{RError.Tipo}}</td> 
+        <td>{{RError.Linea}}</td> 
+        <td>{{RError.Columna}}</td> 
+        <td>{{RError.Descripcion}}</td> </tr>
+    </tbody>
+</table>

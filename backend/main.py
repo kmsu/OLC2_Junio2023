@@ -60,7 +60,6 @@ def salida():
     ast.setTsglobal(TsgGlobal)
     
 
-
     for error in errores:
         ast.setExcepciones(error)
 
@@ -68,7 +67,7 @@ def salida():
     #     value = instruccion.interpretar(ast, TsgGlobal)
     #     if isinstance(value, Excepcion):
     #         ast.setExcepciones(value)
-    print(str(ast.getInstr()) + " esta es la Instruccion")
+    #print(str(ast.getInstr()) + " esta es la Instruccion")
 
     
     for instruccion in ast.getInstr():

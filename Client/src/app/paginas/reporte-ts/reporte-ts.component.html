@@ -1,1 +1,26 @@
-<p>reporte-ts works!</p>
+<h1>REPORTE TABLA SIMBOLOS</h1>
+<table class="table table-success table-striped">
+    <thead> 
+        <tr >  
+            <th>No.</th> 
+            <th>Id</th> 
+            <th>Tipo Dato</th> 
+            <th>Valor</th> 
+            <th>Entorno</th> 
+            <th>Linea</th> 
+            <th>Columna</th> 
+        </tr>
+     </thead>
+    
+    <tbody>
+        <tr  *ngFor="let Sym of Reporte" > 
+            <td>{{Sym.no}}</td> 
+            <td>{{Sym.id}}</td> 
+            <td>{{Sym.TipoDato}}</td> 
+            <td>{{Sym.valor}}</td> 
+            <td>{{Sym.entorno}}</td> 
+            <td>{{Sym.linea}}</td> 
+            <td>{{Sym.columna}}</td> 
+        </tr>
+    </tbody>
+</table>
