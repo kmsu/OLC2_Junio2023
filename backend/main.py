@@ -1,5 +1,8 @@
 # CORS -> Cross Origin Resource Sharing
 # Si no existe el CORS, no se puede acceder a los recursos de un servidor desde otro servidor
+from src.Nativas.concat import Concat
+from src.Nativas.split import Split
+from src.Nativas.exponential import ToExponential
 from src.Nativas.tofixed import ToFixed
 from src.Nativas.tostring import String
 from src.Nativas.tolowercase import ToLowerCase
@@ -118,19 +121,21 @@ def agregarNativas(ast):
     toFixed = ToFixed(nombre, parametro, instrucciones, -1,-1)
     ast.setFunciones(toFixed)
 
-    #  nombre = "toExponential"
-    # parametro = [{'tipo':'any', 'id':'toExponential##Param1'}]
-    # toString = String(nombre, parametro, instrucciones, -1,-1)
-    # ast.setFunciones(toString)
+    nombre = "toExponential"
+    parametro = [{'tipo':'any', 'id':'toExponential##Param1'},{'tipo':'any', 'id':'toExponential##Param2'}]
+    toExponential = ToExponential(nombre, parametro, instrucciones, -1,-1)
+    ast.setFunciones(toExponential)
 
-    #  nombre = "split"
-    # parametro = [{'tipo':'any', 'id':'split##Param1'}]
-    # toString = String(nombre, parametro, instrucciones, -1,-1)
-    # ast.setFunciones(toString)
+    nombre = "split"
+    parametro = [{'tipo':'any', 'id':'split##Param1'},{'tipo':'any', 'id':'split##Param2'}]
+    split = Split(nombre, parametro, instrucciones, -1,-1)
+    ast.setFunciones(split)
 
-    #  nombre = "concat"
-    # parametro = [{'tipo':'any', 'id':'concat##Param1'}]
-    # toString = String(nombre, parametro, instrucciones, -1,-1)
-    # ast.setFunciones(toString)
+    nombre = "concat"
+    parametro = [{'tipo':'any', 'id':'concat##Param1'},{'tipo':'any', 'id':'concat##Param2'}]
+    toString = Concat(nombre, parametro, instrucciones, -1,-1)
+    ast.setFunciones(toString)
+
+
 if __name__ == '__main__':
     app.run(debug = True, port=8080)

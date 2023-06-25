@@ -12,6 +12,8 @@ class ToUpperCase(Funcion):
         if simbolo == None: 
             print(str("simbolo toupercase" + simbolo))
             return Excepcion("Semantico", "No se encontro el parametro de toUpperCase", self.fila, self.columna)
-            
+         
         self.tipo = simbolo.getTipo()
-        return simbolo.getValor().upper()
+        if(self.tipo=="string"):
+            return simbolo.getValor().upper()
+        return Excepcion("Semantico", "Se esperaba string", self.fila, self.columna)
