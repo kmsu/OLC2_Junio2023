@@ -1,5 +1,6 @@
 # CORS -> Cross Origin Resource Sharing
 # Si no existe el CORS, no se puede acceder a los recursos de un servidor desde otro servidor
+from typing import Dict, List
 from src.Nativas.concat import Concat
 from src.Nativas.split import Split
 from src.Nativas.exponential import ToExponential
@@ -13,6 +14,7 @@ from src.Instrucciones.funcion import Funcion
 from src.Expresiones.identificador import Identificador
 from src.Instrucciones.llamada_funcion import Llamada_Funcion
 from src.Instrucciones.imprimir import Imprimir
+from src.Tabla_Simbolos.Tipo import TIPO
 from src.Tabla_Simbolos.arbol import Arbol
 from src.Tabla_Simbolos.excepcion import Excepcion
 from src.Tabla_Simbolos.tabla_simbolos import TablaSimbolos
@@ -85,6 +87,7 @@ def salida():
 
     global Simbolos
     Simbolos = ast.getTsglobal().getTablaG()
+    
     consola = str(ast.getConsola())
     print('Consola: ', consola)
     if ast.excepciones != None:
@@ -105,14 +108,18 @@ def getTabla():
     for x in Simbolos:
         aux = Simbolos[x].getValor()
         tipo = Simbolos[x].getTipo()
-        tipo = getTipo(tipo)
+        #tipo = getTipo(tipo)
         fila = Simbolos[x].getFila()
-        colum = Simbolos[x].getColum()
+        colum = Simbolos[x].getColumna()
+       
         if isinstance(aux, List):
-            aux = getValores(aux)
             a = []
+            b = []
             a.append(str(x))
-            a.append(str(aux))
+            if(len(aux)>0):
+                aux = getValores(aux)
+                a.append(str(aux))
+            
             a.append('Array')
             a.append('Global')
             a.append(str(fila))
@@ -142,7 +149,8 @@ def getTabla():
 def getValores(anterior):
     actual = []
     for x in anterior:
-        a = x.getValor()
+        print(str(x)+" equis")
+        a = x
         if isinstance(a, List):
             value = getValores(a)
             actual.append(value)
@@ -150,7 +158,7 @@ def getValores(anterior):
             value = getValores2(a)
             actual.append(value)
         else:
-            actual.append(x.getValor())
+            actual.append(x)
     return actual
 
 def getValores2( dict):
