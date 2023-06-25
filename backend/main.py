@@ -91,6 +91,97 @@ def salida():
         for aux in ast.excepciones:
             print('Errores', aux.toString())
     return json.dumps({'consola':consola, 'mensaje': 'Compilado :3'})
+@app.route('/getErrores')
+def getErrores():
+    global Excepciones
+    aux = []
+    for x in Excepciones:
+        aux.append(x.toString2())
+    return {'valores': aux}
+@app.route('/getTS')
+def getTabla():
+    global Simbolos
+    Dic = []
+    for x in Simbolos:
+        aux = Simbolos[x].getValor()
+        tipo = Simbolos[x].getTipo()
+        tipo = getTipo(tipo)
+        fila = Simbolos[x].getFila()
+        colum = Simbolos[x].getColum()
+        if isinstance(aux, List):
+            aux = getValores(aux)
+            a = []
+            a.append(str(x))
+            a.append(str(aux))
+            a.append('Array')
+            a.append('Global')
+            a.append(str(fila))
+            a.append(str(colum))
+            Dic.append(a)
+        elif isinstance(aux, Dict):
+            aux = getValores2(aux)
+            a = []
+            a.append(str(x))
+            a.append(str(aux))
+            a.append('Struct')
+            a.append('Global')
+            a.append(str(fila))
+            a.append(str(colum))
+            Dic.append(a)
+        else:
+            a = []
+            a.append(str(x))
+            a.append(str(aux))
+            a.append(tipo)
+            a.append('Global')
+            a.append(str(fila))
+            a.append(str(colum))
+            Dic.append(a)
+    return {'valores':Dic}
+
+def getValores(anterior):
+    actual = []
+    for x in anterior:
+        a = x.getValor()
+        if isinstance(a, List):
+            value = getValores(a)
+            actual.append(value)
+        elif isinstance(a, Dict):
+            value = getValores2(a)
+            actual.append(value)
+        else:
+            actual.append(x.getValor())
+    return actual
+
+def getValores2( dict):
+    val = "("
+    for x in dict:
+        a = dict[x].getValor()
+        if isinstance(a, List):
+            value = getValores(a)
+            val += str(value) + ", "
+        elif isinstance(a, Dict):
+            value = getValores2(a)
+            val += str(value) + ", "
+        else:
+            val += str(dict[x].getValor()) + ", "
+    val = val[:-2]  
+    val += ")"
+    return val
+
+def getTipo(tipo):
+    if tipo == TIPO.ENTERO:
+        return "Int64"
+    if tipo == TIPO.STRING:
+        return "String"
+    if tipo == TIPO.CHAR:
+        return "Char"
+    if tipo == TIPO.FLOAT:
+        return "Float64"
+    if tipo == TIPO.BOOL:
+        return "Bool"
+    if tipo == TIPO.NULO:
+        return "nothing"
 
 def agregarNativas(ast):
     instrucciones = []

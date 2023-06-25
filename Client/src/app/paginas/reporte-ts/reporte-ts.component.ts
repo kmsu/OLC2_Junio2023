@@ -7,7 +7,7 @@ import { DataService } from 'src/app/servicios/data.service';
   styleUrls: ['./reporte-ts.component.css']
 })
 export class ReporteTSComponent implements OnInit{
-  
+
   Reporte:Array<any> = [];
 
   constructor(private dataService:DataService) { }
@@ -22,6 +22,7 @@ export class ReporteTSComponent implements OnInit{
   GetTS(){
     this.dataService.getTS().subscribe(
       (res: any)=>{
+        console.log(JSON.stringify(res.reporte))
         this.Reporte = res.reporte;
       },
       (err)=>{
