@@ -1,3 +1,7 @@
+from src.Nativas.tostring import String
+from src.Nativas.tolowercase import ToLowerCase
+from src.Nativas.touppercase import ToUpperCase
+from src.Nativas.typeof import Typeof
 from src.Instrucciones.arregloOperacion import ArregloOperacion
 from src.Instrucciones._return import Return
 from src.Instrucciones.llamada_funcion import Llamada_Funcion

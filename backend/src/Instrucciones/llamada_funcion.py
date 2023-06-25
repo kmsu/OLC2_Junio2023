@@ -17,7 +17,7 @@ class Llamada_Funcion(Abstract):
             return Excepcion("Semantico", "No se encontro la funcion: " + str(self.nombre), str(self.fila), str(self.columna))
         entorno = TablaSimbolos(arbol.getTsglobal())
         
-        print("esto viene en parametros: "+str(self.parametros))
+        #print("esto viene en parametros: "+str(self.parametros))
         if(self.parametros != None):
             #Comprobamos la cantidad de parametros de la llamada de la funcion y de la funcion (deben coincidir)
             if len(self.parametros) == len(result.parametros):
@@ -28,7 +28,9 @@ class Llamada_Funcion(Abstract):
                     if result.parametros[contador]['tipo'] == expresion.tipo:
                         simbolo = Simbolo(str(result.parametros[contador]['id']), expresion.tipo, resultE, None, self.fila, self.columna)
                         resultT = entorno.setTablaFuncion(simbolo)
-                        if isinstance(resultT, Excepcion): return resultT
+                    elif result.parametros[contador]['tipo'] == 'any':
+                        simbolo = Simbolo(str(result.parametros[contador]["id"]), expresion.tipo, resultE,None, self.fila, self.columna)
+                        resultT = entorno.setTablaFuncion(simbolo)
                     else:
                         return Excepcion("Semantico", "Tipo de dato diferente en Parametros", str(self.fila), str(self.columna))
                     contador += 1

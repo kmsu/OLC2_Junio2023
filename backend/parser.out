@@ -6,16 +6,9 @@ Unused terminals:
     COMILLASIMPLE
     RANY
     RBREAK
-    RCONCAT
     RCONTINUE
     RINTERFACE
     RNULL
-    RSPLIT
-    RTOEXPONENTIAL
-    RTOFIXED
-    RTOLOWERCASE
-    RTOSTRING
-    RTOUPPERCASE
 
 Grammar
 
@@ -135,7 +128,6 @@ PUNTO                : 16
 RANY                 : 
 RBOOLEAN             : 22
 RBREAK               : 
-RCONCAT              : 
 RCONSOLE             : 16
 RCONTINUE            : 
 RELSE                : 27 28
@@ -150,13 +142,7 @@ RNULL                :
 RNUMBER              : 21
 ROF                  : 30
 RRETURN              : 46
-RSPLIT               : 
 RSTRING              : 20
-RTOEXPONENTIAL       : 
-RTOFIXED             : 
-RTOLOWERCASE         : 
-RTOSTRING            : 
-RTOUPPERCASE         : 
 RTRUE                : 68
 RWHILE               : 33
 error                : 
