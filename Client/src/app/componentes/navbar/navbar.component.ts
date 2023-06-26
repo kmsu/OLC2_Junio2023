@@ -27,15 +27,15 @@ export class NavbarComponent {
   }
 
   reporteAST(){
-    //this.dataService.reporteAST$.emit();
+    this.dataService.reporteAST$.emit();
   }
 
   reporteError(){
-    //this.dataService.reporteErrore$.emit();
+    this.dataService.reporteErrore$.emit();
   }
 
   reporteTS(){
-    //this.dataService.reporteTS$.emit();
+    this.dataService.reporteTS$.emit();
   }
 
   Limpiar(){

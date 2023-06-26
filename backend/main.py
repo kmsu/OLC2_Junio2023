@@ -49,9 +49,11 @@ def compilar():
     else:
         return {"mensaje": "No compilado"}
 
+
 @app.route('/salida')
 def salida():
     global tmp_val
+    global Excepciones 
     #print(tmp_val)
     global Tabla
     Tabla = {}
@@ -60,7 +62,8 @@ def salida():
     agregarNativas(ast)
     TsgGlobal = TablaSimbolos()
     ast.setTsglobal(TsgGlobal)
-    
+    global reporteTS
+    reporteTS = TsgGlobal.reporteTS()
 
     for error in errores:
         ast.setExcepciones(error)
@@ -85,6 +88,7 @@ def salida():
             if isinstance(value, Excepcion):
                 ast.setExcepciones(value)
 
+    Excepciones = ast.getExcepciones()
     global Simbolos
     Simbolos = ast.getTsglobal().getTablaG()
     
@@ -94,13 +98,21 @@ def salida():
         for aux in ast.excepciones:
             print('Errores', aux.toString())
     return json.dumps({'consola':consola, 'mensaje': 'Compilado :3'})
+
 @app.route('/getErrores')
 def getErrores():
     global Excepciones
     aux = []
     for x in Excepciones:
         aux.append(x.toString2())
-    return {'valores': aux}
+    json_data= []
+    i = 0
+    for di in aux:
+        data = {'Tipo':di[0] , 'Linea':di[2],'Columna':di[2],'Descripcion':di[1]} 
+        json_data.append(data)
+        
+    return {"valores":json_data}
+
 @app.route('/getTS')
 def getTabla():
     global Simbolos
@@ -119,6 +131,8 @@ def getTabla():
             if(len(aux)>0):
                 aux = getValores(aux)
                 a.append(str(aux))
+            else:
+                a.append(b)
             
             a.append('Array')
             a.append('Global')
@@ -138,13 +152,26 @@ def getTabla():
         else:
             a = []
             a.append(str(x))
-            a.append(str(aux))
             a.append(tipo)
+            a.append(str(aux))
             a.append('Global')
             a.append(str(fila))
             a.append(str(colum))
             Dic.append(a)
-    return {'valores':Dic}
+    json_data= []
+    i = 1
+    for di in Dic:
+        data = {'no':i , 'id':di[0],'TipoDato':di[2],'valor':di[1],'entorno':di[3], 'linea':di[4], 'columna':[5]} 
+        json_data.append(data)
+        i = i+1
+        
+    return {"valores":json_data}
+
+# @app.route('/getTS')
+# def getTabla2():
+#     reporteTS
+#     print("ESTA ES LA LISTA DE TS: " + str(reporteTS))
+#     return json.dumps({'reporte':reporteTS})
 
 def getValores(anterior):
     actual = []

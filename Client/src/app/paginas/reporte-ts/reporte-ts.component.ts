@@ -22,8 +22,9 @@ export class ReporteTSComponent implements OnInit{
   GetTS(){
     this.dataService.getTS().subscribe(
       (res: any)=>{
-        console.log(JSON.stringify(res.reporte))
-        this.Reporte = res.reporte;
+        console.log("ESTOY EN EL REPORTE TS COMPONENT")
+        this.Reporte = res.valores;
+        console.log(this.Reporte)
       },
       (err)=>{
         console.log(err);

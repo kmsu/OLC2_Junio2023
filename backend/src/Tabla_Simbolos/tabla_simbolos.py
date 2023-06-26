@@ -1,3 +1,4 @@
+import json
 from ..Tabla_Simbolos.excepcion import Excepcion
 
 class TablaSimbolos:
@@ -38,5 +39,18 @@ class TablaSimbolos:
                 tablaActual = tablaActual.anterior
         return Excepcion("Semantico", "Variable no encontrada. " + str(simbolo.getID()), simbolo.getFila(), simbolo.getColumna())
 
-
+    def reporteTS(self):
+        list = []
+        cont = 1
+        entorno = "Global"
+        tablaActual = self
+        while tablaActual != None:
+            for ide in tablaActual.tabla: #estructura python: busca ide en la lista tabla
+                temp = tablaActual.tabla[ide]
+                var = json.dumps('{"no":'+cont+', "id": "' + temp.getId()+ '", "TipoDato": "'+ temp.getTipo() + '", "valor": "'+ str(temp.getValor()) + '", "entorno": "'+ entorno + '", "linea": '+ temp.getFila()+', "columna": ' + temp.getColumna()+' }')
+                #return tablaActual.tabla[ide]
+                list.append(var)
+            entorno = "Local"
+            tablaActual = tablaActual.anterior
+        return list
 

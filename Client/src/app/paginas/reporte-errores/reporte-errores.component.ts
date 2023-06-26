@@ -26,7 +26,7 @@ export class ReporteErroresComponent implements OnInit {
   GetErrores(){
     this.dataService.getErrores().subscribe(
       (res: any)=>{
-        this.Reporte = res.reporte;
+        this.Reporte = res.valores;
       },
       (err)=>{
         console.log(err);

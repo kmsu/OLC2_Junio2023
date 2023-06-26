@@ -30,11 +30,13 @@ export class DataService {
   } 
 
   getErrores(){
+    console.log(this.http.get(`${this.URL}/getErrores`))
     return this.http.get(`${this.URL}/getErrores`);
   } 
  
 
   getTS(){
+    console.log(this.http.get(`${this.URL}/getTS`))
     return this.http.get(`${this.URL}/getTS`);
   } 
   
