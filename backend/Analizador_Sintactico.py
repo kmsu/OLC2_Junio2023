@@ -93,20 +93,20 @@ def p_imprimir_lista2(t):
     else:
         t[0] = [t[1]]
 
-def p_declaracion_normal(t):
-    'declaracion_normal : RLET ID DPUNTOS tipo IGUAL expresion'
-    t[0] = Declaracion_Variables(t[2], t[4], t[6], t.lineno(1), find_column(input, t.slice[1]))
-
 def p_declaracion_normal2(t):
     'declaracion_normal : RLET ID DPUNTOS tipo'
     var =''
     if(t[4] == 'string'):
-        var = ""
+        var = Primitivos('string', "", t.lineno(1), find_column(input, t.slice[1]))
     elif(t[4] == 'number'):
-        var = 0
+        var = Primitivos('number', 0, t.lineno(1), find_column(input, t.slice[1]))
     elif(t[4] == 'boolean'):
-        var = True
+        var = Primitivos('boolean', True, t.lineno(1), find_column(input, t.slice[1]))
     t[0] = Declaracion_Variables(t[2], t[4], var, t.lineno(1), find_column(input, t.slice[1]))
+
+def p_declaracion_normal(t):
+    'declaracion_normal : RLET ID DPUNTOS tipo IGUAL expresion'
+    t[0] = Declaracion_Variables(t[2], t[4], t[6], t.lineno(1), find_column(input, t.slice[1]))
 
 def p_tipo(t):
     '''tipo : RSTRING
@@ -114,7 +114,7 @@ def p_tipo(t):
             | RBOOLEAN'''
     t[0] = t[1]
 
-def p_declaracion_normal2(t):
+def p_declaracion_normal3(t):
     'declaracion_normal : RLET ID IGUAL expresion'
     t[0] = Declaracion_Variables(t[2], None, t[4], t.lineno(1), find_column(input, t.slice[1]))
 

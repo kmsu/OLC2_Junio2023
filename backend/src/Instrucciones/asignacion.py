@@ -14,7 +14,11 @@ class Asignacion(Abstract):
         if isinstance(value, Excepcion): return value # Analisis Semantico -> Error
 
         variable = tabla.getTabla(self.ide)
-        tipoVariable = variable.getTipo()
+        if(variable != None):
+            tipoVariable = variable.getTipo()
+        else:
+            #result = Excepcion("Semantico", "No se encontro la variable " + str(self.ide) , self.fila, self.columna)
+            return None
         # Verificacion de tipos
         if tipoVariable == None:
             tipoVariable = self.valor.tipo
