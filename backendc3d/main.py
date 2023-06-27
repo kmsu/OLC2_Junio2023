@@ -1,6 +1,7 @@
 # CORS -> Cross Origin Resource Sharing
 # Si no existe el CORS, no se puede acceder a los recursos de un servidor desde otro servidor
 from typing import Dict, List
+from src.Tabla_Simbolos.generador import Generador
 from src.Nativas.concat import Concat
 from src.Nativas.split import Split
 from src.Nativas.exponential import ToExponential
@@ -57,9 +58,12 @@ def salida():
     #print(tmp_val)
     global Tabla
     Tabla = {}
+    genAux = Generador()
+    genAux.cleanAll(); # Limpia todos los archivos anteriores
+    generador = genAux.getInstance()
     instrucciones = Analizar(tmp_val)
     ast = Arbol(instrucciones)
-    agregarNativas(ast)
+#    agregarNativas(ast)
     TsgGlobal = TablaSimbolos()
     ast.setTsglobal(TsgGlobal)
     
@@ -93,6 +97,7 @@ def salida():
     
     consola = str(ast.getConsola())
     print('Consola: ', consola)
+    print('generador: ', generador.getCode())
     if ast.excepciones != None:
         for aux in ast.excepciones:
             print('Errores', aux.toString())
@@ -217,48 +222,48 @@ def getTipo(tipo):
     if tipo == TIPO.NULO:
         return "nothing"
 
-def agregarNativas(ast):
-    instrucciones = []
+# def agregarNativas(ast):
+#     instrucciones = []
 
-    nombre = "toUpperCase"
-    parametro = [{'tipo':'any', 'id':'toUpperCase##Param1'}]
-    toUpperCase = ToUpperCase(nombre, parametro, instrucciones, -1,-1)
-    ast.setFunciones(toUpperCase)
+#     nombre = "toUpperCase"
+#     parametro = [{'tipo':'any', 'id':'toUpperCase##Param1'}]
+#     toUpperCase = ToUpperCase(nombre, parametro, instrucciones, -1,-1)
+#     ast.setFunciones(toUpperCase)
 
-    nombre = "typeof"
-    parametro = [{'tipo':'any', 'id':'typeof##Param1'}]
-    typeof = Typeof(nombre, parametro, instrucciones, -1,-1)
-    ast.setFunciones(typeof)
+#     nombre = "typeof"
+#     parametro = [{'tipo':'any', 'id':'typeof##Param1'}]
+#     typeof = Typeof(nombre, parametro, instrucciones, -1,-1)
+#     ast.setFunciones(typeof)
 
-    nombre = "toLowerCase"
-    parametro = [{'tipo':'any', 'id':'toLower##Param1'}]
-    toLowerCase = ToLowerCase(nombre, parametro, instrucciones, -1,-1)
-    ast.setFunciones(toLowerCase)
+#     nombre = "toLowerCase"
+#     parametro = [{'tipo':'any', 'id':'toLower##Param1'}]
+#     toLowerCase = ToLowerCase(nombre, parametro, instrucciones, -1,-1)
+#     ast.setFunciones(toLowerCase)
 
-    nombre = "toString"
-    parametro = [{'tipo':'any', 'id':'toString##Param1'}]
-    toString = String(nombre, parametro, instrucciones, -1,-1)
-    ast.setFunciones(toString)
+#     nombre = "toString"
+#     parametro = [{'tipo':'any', 'id':'toString##Param1'}]
+#     toString = String(nombre, parametro, instrucciones, -1,-1)
+#     ast.setFunciones(toString)
 
-    nombre = "toFixed"
-    parametro = [{'tipo':'any', 'id':'toFixed##Param1'},{'tipo':'any', 'id':'toFixed##Param2'}]
-    toFixed = ToFixed(nombre, parametro, instrucciones, -1,-1)
-    ast.setFunciones(toFixed)
+#     nombre = "toFixed"
+#     parametro = [{'tipo':'any', 'id':'toFixed##Param1'},{'tipo':'any', 'id':'toFixed##Param2'}]
+#     toFixed = ToFixed(nombre, parametro, instrucciones, -1,-1)
+#     ast.setFunciones(toFixed)
 
-    nombre = "toExponential"
-    parametro = [{'tipo':'any', 'id':'toExponential##Param1'},{'tipo':'any', 'id':'toExponential##Param2'}]
-    toExponential = ToExponential(nombre, parametro, instrucciones, -1,-1)
-    ast.setFunciones(toExponential)
+#     nombre = "toExponential"
+#     parametro = [{'tipo':'any', 'id':'toExponential##Param1'},{'tipo':'any', 'id':'toExponential##Param2'}]
+#     toExponential = ToExponential(nombre, parametro, instrucciones, -1,-1)
+#     ast.setFunciones(toExponential)
 
-    nombre = "split"
-    parametro = [{'tipo':'any', 'id':'split##Param1'},{'tipo':'any', 'id':'split##Param2'}]
-    split = Split(nombre, parametro, instrucciones, -1,-1)
-    ast.setFunciones(split)
+#     nombre = "split"
+#     parametro = [{'tipo':'any', 'id':'split##Param1'},{'tipo':'any', 'id':'split##Param2'}]
+#     split = Split(nombre, parametro, instrucciones, -1,-1)
+#     ast.setFunciones(split)
 
-    nombre = "concat"
-    parametro = [{'tipo':'any', 'id':'concat##Param1'},{'tipo':'any', 'id':'concat##Param2'}]
-    toString = Concat(nombre, parametro, instrucciones, -1,-1)
-    ast.setFunciones(toString)
+#     nombre = "concat"
+#     parametro = [{'tipo':'any', 'id':'concat##Param1'},{'tipo':'any', 'id':'concat##Param2'}]
+#     toString = Concat(nombre, parametro, instrucciones, -1,-1)
+#     ast.setFunciones(toString)
 
 
 if __name__ == '__main__':

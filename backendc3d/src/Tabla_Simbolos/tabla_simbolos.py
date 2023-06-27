@@ -61,3 +61,5 @@ class TablaSimbolos:
                 tablaActual = tablaActual.anterior
         return Excepcion("Semantico", "Variable no encontrada.", simbolo.getFila(), simbolo.getColumna())
 
+
+

@@ -6,7 +6,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 })
 export class DataService {
 
-  //dolar no hace nada, solo me sirve como indicador de que es un observable. 
+  //dolar no hace nada, solo me sirve como indicador de que es un observable.
   //<string> podría no ir pero se usa para indicar que tipo va a manejar el servicio
   contenidoEditor$ = new EventEmitter<string>(); //Variable que almacena lo que enviare entre componentes
   contenidoConsola$ = new EventEmitter<string>(); //Variable que almacena lo que enviare entre componentes
@@ -27,21 +27,19 @@ export class DataService {
 
   getAnalisis(){
     return this.http.get(`${this.URL}/salida`);
-  } 
+  }
 
   getErrores(){
-    console.log(this.http.get(`${this.URL}/getErrores`))
     return this.http.get(`${this.URL}/getErrores`);
-  } 
- 
+  }
+
 
   getTS(){
-    console.log(this.http.get(`${this.URL}/getTS`))
     return this.http.get(`${this.URL}/getTS`);
-  } 
-  
+  }
+
   getAST(){
     return this.http.get(`${this.URL}/getAST`);
   }
-  
+
 }

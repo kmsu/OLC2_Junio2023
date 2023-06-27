@@ -1,4 +1,6 @@
 from ..Tabla_Simbolos.simbolo import Simbolo
+from ..Instrucciones._return import Return
+from ..Tabla_Simbolos.generador import Generador
 from ..Abstract.abstract import Abstract
 from ..Tabla_Simbolos.excepcion import Excepcion
 from ..Tabla_Simbolos.tabla_simbolos import TablaSimbolos
@@ -13,6 +15,16 @@ class For(Abstract):
         super().__init__(fila, columna)
     
     def interpretar(self, arbol, tabla):
+        genAux = Generador()
+        generador = genAux.getInstance()
+        generador.addComment('Compilacion de un for')
+
+        bandera = True
+        entorno = tabla
+        if tabla.findTabla(self.inicio.ide):
+            bandera = False
+
+
         nuevaTabla = TablaSimbolos(tabla)  # NUEVO ENTORNO
 
         inicio = self.inicio.interpretar(arbol, nuevaTabla)
@@ -33,7 +45,7 @@ class For(Abstract):
             nuevo_valor = self.aumento.interpretar(arbol, nuevaTabla)
             if isinstance(nuevo_valor, Excepcion): return nuevo_valor
             
-            simbolo = Simbolo(self.inicio.ide, self.inicio.tipo, nuevo_valor, None, self.fila, self.columna)
+            simbolo = Simbolo(self.inicio.ide, self.inicio.tipo, nuevo_valor, self.fila, self.columna)
 
             # Actualizando el valor de la variable en la tabla de simbolos
             valor = nuevaTabla.updateTabla(simbolo)
@@ -45,7 +57,7 @@ class For(Abstract):
             if self.condicion.tipo != 'boolean':
                 return Excepcion("Semantico", "Tipo de dato no booleano en FOR.", self.fila, self.columna)
         return None
-           
+            
 
 
 

@@ -8,13 +8,3 @@ class Excepcion:
     
     def toString(self):
         return self.tipo + ' - ' + self.desc + ' [' + str(self.fila) + ', ' + str(self.columna) + '];'
-    
-    def toString2(self):
-        respuesta = []
-
-        respuesta.append(self.tipo)
-        respuesta.append(self.desc)
-        respuesta.append(self.fila)
-        respuesta.append(self.columna)
-
-        return respuesta
