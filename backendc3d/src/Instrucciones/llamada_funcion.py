@@ -20,42 +20,45 @@ class Llamada_Funcion(Abstract):
         genAux = Generador()
         generador = genAux.getInstance()
         funcion = arbol.getFuncion(self.nombre)
-
+        
+        funcion.interpretar(arbol, tabla)
         if funcion != None:
             generador.addComment(f'Llamada a la funcion {self.nombre}')
             paramValues = []
             temps = []
             size = tabla.size
-
-            for parametros in self.parametros:
-                if isinstance(parametros, Llamada_Funcion):
-                    self.guardarTemps(generador, tabla, temps)
-                    a = parametros.interpretar(arbol, tabla)
-                    if isinstance(a, Excepcion): return a
-                    paramValues.append(a)
-                    self.recuperarTemps(generador, tabla, temps)
-                else:
-                    value = parametros.interpretar(arbol, tabla)
-                    if isinstance(value, Excepcion):
-                        return value
-                    paramValues.append(value)
-                    temps.append(value.getValue())
+            if(self.parametros!=None):
+                for parametros in self.parametros:
+                    if isinstance(parametros, Llamada_Funcion):
+                        self.guardarTemps(generador, tabla, temps)
+                        a = parametros.interpretar(arbol, tabla)
+                        if isinstance(a, Excepcion): return a
+                        paramValues.append(a)
+                        self.recuperarTemps(generador, tabla, temps)
+                    else:
+                        value = parametros.interpretar(arbol, tabla)
+                        if isinstance(value, Excepcion):
+                            return value
+                        paramValues.append(value)
+                        temps.append(value.getValue())
             
             temp = generador.addTemp()
 
             generador.addExp(temp,'P',size+1, '+')
             aux = 0
-            if len(funcion.getParams()) == len(paramValues):
-                for param in paramValues:
-                    if funcion.parametros[aux]['tipo'] == param.getTipo():
-                        aux += 1
-                        generador.setStack(temp,param.getValue())
-                        if aux != len(paramValues):
-                            generador.addExp(temp,temp,1,'+')
-                    else:
-                        generador.addComment(f'Fin de la llamada a la funcion {self.nombre} por error, consulte la lista de errores')
-                        return Excepcion("Semantico", f"El tipo de dato de los parametros no coincide con la funcion {self.nombre}", self.fila, self.columna)
-
+            
+            if(paramValues!=[]):
+                if len(funcion.getParams()) == len(paramValues):
+                    for param in paramValues:
+                        if funcion.parametros[aux]['tipo'] == param.getTipo():
+                            aux += 1
+                            generador.setStack(temp,param.getValue())
+                            if aux != len(paramValues):
+                                generador.addExp(temp,temp,1,'+')
+                        else:
+                            generador.addComment(f'Fin de la llamada a la funcion {self.nombre} por error, consulte la lista de errores')
+                            return Excepcion("Semantico", f"El tipo de dato de los parametros no coincide con la funcion {self.nombre}", self.fila, self.columna)
+            
             generador.newEnv(size)
             self.getFuncion(generator=generador) # Sirve para llamar a una funcion nativa
             generador.callFun(funcion.nombre)

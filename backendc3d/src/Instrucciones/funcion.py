@@ -17,11 +17,13 @@ class Funcion(Abstract):
     
 
     def interpretar(self, arbol, tabla):
-        funcion = arbol.setFunciones(self.nombre, self)
-        if funcion == 'error':
-            error = Excepcion("Semantico", f"Ya existe la funcion {self.nombre}", self.fila, self.columna)
-            return error
+
         
+        #funcion = arbol.setFunciones(self.nombre, self)
+        # if funcion == 'error':
+        #     error = Excepcion("Semantico", f"Ya existe la funcion {self.nombre}", self.fila, self.columna)
+        #     return error
+        print("DECLARANDO FUNCION")
         genAux = Generador()
         generador = genAux.getInstance()
         generador.addComment(f'Compilacion de la funcion {self.nombre}')
