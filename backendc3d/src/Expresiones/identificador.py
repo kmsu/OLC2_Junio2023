@@ -14,12 +14,26 @@ class Identificador(Abstract):
         self.sym = None
 
     def interpretar(self, arbol , tabla):
+        genAux = Generador()
+        generator = genAux.getInstance()
+
+        generator.addComment("Compilacion de Acceso")
         simbolo = tabla.getTabla(self.ide)
         if simbolo == None:
+            generator.addComment("Fin de compilacion de Acceso por error")
             return Excepcion("Semantico", "Variable no encontrada class identificador " + self.ide, self.fila, self.columna)
-        self.tipo = simbolo.getTipo()
-        self.sym = simbolo
-        return simbolo.getValor()
+        # Temporal para guardar la variable
+        temp = generator.addTemp()
+
+        # Obtencion de posicion de la variable
+        tempPos = simbolo.pos
+        if not simbolo.isGlobal:
+            tempPos = generator.addTemp()
+            generator.addExpression(tempPos, 'P', simbolo.pos, '+')
+
+        generator.getStack(temp, tempPos)
+        generator.addComment("Fin de compilacion de Acceso")
+        return Return(temp, simbolo.type, True)
 
     def getTipo(self):
         return self.tipo

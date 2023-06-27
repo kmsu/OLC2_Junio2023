@@ -32,9 +32,9 @@ export class ConsolaComponent {
         for(let val of arreglo){
           this.contenidoConsola += "El valor de la expresion es: " + val + "\n";
         }*/
-        
+
         this.contenidoConsola = res.consola;
-      }, 
+      },
       (err)=> {
         console.log(err);
       }
