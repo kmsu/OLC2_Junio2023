@@ -22,6 +22,9 @@ class Declaracion_Variables(Abstract):
         value = self.valor.interpretar(arbol, tabla)
         if isinstance(value, Excepcion): return value # Analisis Semantico -> Error
         # Verificacion de tipos
+        if self.tipo == None:
+            self.tipo = self.valor.tipo
+        
         if str(self.tipo) == str(self.valor.tipo):
             inHeap = value.getTipo() == 'string' or value.getTipo() == 'interface'
             simbolo = tabla.setTabla(self.ide, value.getTipo(), inHeap , self.find)
@@ -34,7 +37,7 @@ class Declaracion_Variables(Abstract):
         tempPos = simbolo.pos
         if not simbolo.isGlobal:
             tempPos = generator.addTemp()
-            generator.addExpression(tempPos, 'P', simbolo.pos, '+')
+            #generator.addExpression(tempPos, 'P', simbolo.pos, '+')
         
         if value.getTipo() == 'boolean':
             tempLbl = generator.newLabel()

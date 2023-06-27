@@ -19,10 +19,7 @@ class For(Abstract):
         generador = genAux.getInstance()
         generador.addComment('Compilacion de un for')
 
-        bandera = True
-        entorno = tabla
-        if tabla.findTabla(self.inicio.ide):
-            bandera = False
+       
 
 
         nuevaTabla = TablaSimbolos(tabla)  # NUEVO ENTORNO

@@ -14,7 +14,7 @@ class Simbolo():
     
     def getTipo(self):
         return self.type
-    def getId(self):
+    def getID(self):
         return self.id
     def getPos(self):
         return self.pos
@@ -55,5 +55,6 @@ class Simbolo():
     
     def getValue(self):
         return self.value
-    def setValue(self, value):
+    
+    def setValor(self, value):
         self.value = value

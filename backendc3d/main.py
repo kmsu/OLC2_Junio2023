@@ -77,12 +77,6 @@ def salida():
     #         ast.setExcepciones(value)
     #print(str(ast.getInstr()) + " esta es la Instruccion")
 
-    
-    for instruccion in ast.getInstr():
-        
-        #value = instruccion.interpretar(ast, TsgGlobal)
-        if isinstance(instruccion, Funcion):
-            ast.setFunciones(instruccion )
         
     
     for instruccion in ast.getInstr():
