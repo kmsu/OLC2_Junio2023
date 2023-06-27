@@ -31,10 +31,15 @@ class Aritmetica(Abstract):
             if isinstance(der, Excepcion): return der
 
         if self.op == '+':
+            
             operador = '+'
             temporal = generador.addTemp()
             generador.addExp(temporal, izq.getValue(), der.getValue(), operador)
-            self.tipo = 'number'
+            if self.op_izq.getTipo() == 'number':
+                self.tipo = 'number'
+                return izq + der
+            elif self.op_izq.getTipo() == 'string':
+                self.tipo = 'string'
             return Return(temporal, self.tipo, True)
         elif self.op == '-':
             operador = '-'
