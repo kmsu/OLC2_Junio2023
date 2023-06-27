@@ -98,6 +98,7 @@ def salida():
     consola = str(ast.getConsola())
     print('Consola: ', consola)
     print('generador: ', generador.getCode())
+    generador = []
     if ast.excepciones != None:
         for aux in ast.excepciones:
             print('Errores', aux.toString())
