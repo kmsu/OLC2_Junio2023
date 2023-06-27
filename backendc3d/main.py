@@ -62,8 +62,7 @@ def salida():
     agregarNativas(ast)
     TsgGlobal = TablaSimbolos()
     ast.setTsglobal(TsgGlobal)
-    global reporteTS
-    reporteTS = TsgGlobal.reporteTS()
+    
 
     for error in errores:
         ast.setExcepciones(error)

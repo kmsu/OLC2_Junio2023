@@ -1,5 +1,6 @@
-from ..Abstract.abstract import Abstract
 from ..Tabla_Simbolos.excepcion import Excepcion
+from ..Tabla_Simbolos.generador import Generador
+from ..Abstract.abstract import Abstract
 
 class Imprimir(Abstract):
 
@@ -8,15 +9,42 @@ class Imprimir(Abstract):
         super().__init__(fila, columna)
     
     def interpretar(self, tree, table):
-        value = ""
-        
-        for aux in self.expresion:
-            x = aux.interpretar(tree, table)
-            if isinstance(x, Excepcion):
-                value = x.toString()
-            else: 
-                value += str(aux.interpretar(tree, table))
-            
-        #print(value)
-        tree.updateConsola(str(value)) #envia a la consola del main por medio de la clase arbol, cadenas para imprimir en consola.
-        return value
+        genAux = Generador()
+        generator = genAux.getInstance()
+
+        for valor in self.expresion:
+            value = valor.interpretar(tree, table)
+
+            if isinstance(value, Excepcion): return value
+
+            if value.getTipo() == 'number':
+                generator.addPrint('f', value.getValue())
+            elif value.getTipo() == 'string':
+                generator.fPrintString()
+
+                paramTemp = generator.addTemp()
+                
+                generator.addExp(paramTemp, 'P', table.size, '+')
+                generator.addExp(paramTemp, paramTemp, '1', '+')
+                generator.setStack(paramTemp, value.value)
+                
+                generator.newEnv(table.size)
+                generator.callFun('printString')
+
+                temp = generator.addTemp()
+                generator.getStack(temp, 'P')
+                generator.retEnv(table.size)
+            elif value.getTipo() == 'boolean':
+                tempLbl = generator.newLabel()
+
+                generator.putLabel(value.getTrueLbl())
+                generator.printTrue()
+
+                generator.addGoto(tempLbl)
+
+                generator.putLabel(value.getFalseLbl())
+                generator.printFalse()
+
+                generator.putLabel(tempLbl)
+
+        generator.addPrint('c', 10)

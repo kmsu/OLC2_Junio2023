@@ -1,49 +1,59 @@
 class Simbolo():
-    #arregloTipos me sirve para guardar un arreglo de los tipos de los elementos del arreglo que este reconociendo
-    def __init__(self, ide, tipo, valor, arregloTipos, fila, columna):
-        self.ide = ide
-        self.tipo = tipo
-        self.valor = valor
-        self.arregloTipos = arregloTipos
-        self.fila = fila
-        self.columna = columna
+
+    def __init__(self, ide, tipo, posicion, globalVar, inHeap):
+        self.id = ide
+        self.type = tipo
+        self.pos = posicion
+        self.isGlobal = globalVar
+        self.inHeap = inHeap
+        self.value = None
+        self.tipoAux = ''
+        self.length = 0
+        self.referencia = False
+        self.params = None
     
-    def getID(self):
-        return self.ide
-
-    def setID(self, ide):
-        self.ide = ide
-
     def getTipo(self):
-        return self.tipo
+        return self.type
+    def getId(self):
+        return self.id
+    def getPos(self):
+        return self.pos
+    def getInHeap(self):
+        return self.inHeap
+    
+    def getParams(self):
+        return self.params
+    
+    def setParams(self, params):
+        self.params = params
     
     def setTipo(self, tipo):
-        self.tipo = tipo
+        self.type = tipo
+    def setId(self, id):
+        self.id = id
+    def setPos(self, pos):
+        self.pos = pos
+    def setInHeap(self, value):
+        self.inHeap = value
     
-    def getValor(self):
-        return self.valor
-    
-    def setValor(self, valor):
-        self.valor = valor
-    
-     # Aqui va lo del array :3
-    # def getValorArreglo(self, indice):
-    #     return self.valor[indice]
+    def setTipoAux(self, tipo):
+        self.tipoAux = tipo
 
-    def getValorArreglo(self):
-        return self.arregloTipos
-    
-    def setValorArreglo(self, indice, value):
-        self.valor[indice] = value
+    def getTipoAux(self):
+        return self.tipoAux
 
-    def getFila(self):
-        return self.fila
-    
-    def setFila(self, fila):
-        self.fila = fila
-    
-    def getColumna(self):
-        return self.columna
+    def setLength(self, length):
+        self.length = length
+    def getLength(self):
+        return self.length
 
-    def setColumna(self, columna):
-        self.columna = columna
+    def setReferencia(self, ref):
+        self.referencia = ref
+        
+    def getReferencia(self):
+        return self.referencia
+    
+    def getValue(self):
+        return self.value
+    def setValue(self, value):
+        self.value = value
