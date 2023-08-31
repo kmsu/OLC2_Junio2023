@@ -23,4 +23,3 @@ email: ingkevins@gmail.com<br>
 
 developed by **Juan Paxtor** <br>
 id: 201700470<br>
-email: ingkevins@gmail.com<br>
